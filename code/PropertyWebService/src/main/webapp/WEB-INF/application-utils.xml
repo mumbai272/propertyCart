@@ -7,13 +7,13 @@
   	http://www.springframework.org/schema/context
  	http://www.springframework.org/schema/context/spring-context-4.2.xsd
     http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+	<!-- Property staus map -->
+	<util:map id="propertyStatusMap" map-class="java.util.HashMap"
+		key-type="java.lang.Long" value-type="java.lang.String">
+		<entry key="1" value="Not Started" />
+		<entry key="2" value="In Progress" />
+		<entry key="3" value="Ready to move in" />
+		<entry key="4" value="Deleted" />
+	</util:map>
 
-
-	<util:list id="excludeUrlList" list-class="java.util.ArrayList"
-		value-type="java.lang.String">
-		<value>login</value>
-		<value>user/register</value>
-		<value>user/forgotPassword</value>
-	</util:list>
-	
 </beans>

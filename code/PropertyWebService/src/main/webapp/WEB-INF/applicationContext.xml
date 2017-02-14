@@ -19,36 +19,31 @@
 	<aop:aspectj-autoproxy />
 	<!-- to enable annotation -->
 	<context:annotation-config />
-	<context:component-scan base-package="com.rest.*" />
+	<context:component-scan base-package="com.property.*" />
 	<!-- importing other resources -->
 	<import resource="classpath:META-INF/cxf/cxf.xml" />	
 	<import resource="applicationJpa.xml" />
-	<import resource="application-utils.xml" />
-    
+	<import resource="application-utils.xml" />    
   
 
 	<!--jAX-RS config -->
-	<jaxrs:server id="maintenanceWebService" address="/api">
+	<jaxrs:server id="propertyWebService" address="/api">
 		<jaxrs:inInterceptors>
 			<!-- DTO annotation validation config -->
-			<ref bean="validationInInterceptor" />
-			    
+			<ref bean="validationInInterceptor" />			    
 		</jaxrs:inInterceptors>
-
 		<jaxrs:serviceBeans>
 			<!-- rest api service config -->
-<!-- 			<ref bean="clientRestServiceImpl" /> -->
+			<ref bean="propertyRestServiceImpl" />
 
 		</jaxrs:serviceBeans>
 
 		<jaxrs:providers>
 		      <bean class="org.codehaus.jackson.jaxrs.JacksonJsonProvider" />		
-<!-- 			<bean class="com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider" /> -->
-			<ref bean="sessionValidator" />
 			<bean class="org.apache.cxf.jaxrs.provider.JAXBElementProvider" />
-			<bean class="com.rest.api.exception.ValidationExceprionHandler" />
-			<bean class="com.rest.api.exception.RuntimeExceptionHandler" />
-			<bean class="com.rest.api.exception.ExceptionHandler"/>
+<!-- 			<bean class="com.rest.api.exception.ValidationExceprionHandler" /> -->
+<!-- 			<bean class="com.rest.api.exception.RuntimeExceptionHandler" /> -->
+<!-- 			<bean class="com.rest.api.exception.ExceptionHandler"/> -->
 
 		</jaxrs:providers>
 
