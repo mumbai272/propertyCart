@@ -21,16 +21,17 @@
 	<context:annotation-config />
 	<context:component-scan base-package="com.property.*" />
 	<!-- importing other resources -->
-	<import resource="classpath:META-INF/cxf/cxf.xml" />	
+	<import resource="classpath:META-INF/cxf/cxf.xml" />
 	<import resource="applicationJpa.xml" />
-	<import resource="application-utils.xml" />    
-  
+	<import resource="application-utils.xml" />
+
 
 	<!--jAX-RS config -->
 	<jaxrs:server id="propertyWebService" address="/api">
 		<jaxrs:inInterceptors>
 			<!-- DTO annotation validation config -->
-			<ref bean="validationInInterceptor" />			    
+			<ref bean="validationInInterceptor" />
+			    
 		</jaxrs:inInterceptors>
 		<jaxrs:serviceBeans>
 			<!-- rest api service config -->
@@ -39,11 +40,11 @@
 		</jaxrs:serviceBeans>
 
 		<jaxrs:providers>
-		      <bean class="org.codehaus.jackson.jaxrs.JacksonJsonProvider" />		
+			<bean class="org.codehaus.jackson.jaxrs.JacksonJsonProvider" />
 			<bean class="org.apache.cxf.jaxrs.provider.JAXBElementProvider" />
-<!-- 			<bean class="com.rest.api.exception.ValidationExceprionHandler" /> -->
-<!-- 			<bean class="com.rest.api.exception.RuntimeExceptionHandler" /> -->
-<!-- 			<bean class="com.rest.api.exception.ExceptionHandler"/> -->
+			<bean class="com.property.common.exception.ValidationExceprionHandler" />
+			<bean class="com.property.common.exception.RuntimeExceptionHandler" />
+			<bean class="com.property.common.exception.ExceptionHandler" />
 
 		</jaxrs:providers>
 
@@ -81,7 +82,7 @@
 				<value>classpath:application.properties</value>
 			</list>
 		</property>
-		<property name="ignoreUnresolvablePlaceholders" value="true"/>		
+		<property name="ignoreUnresolvablePlaceholders" value="true" />
 	</bean>
-<import resource="classpath*:*-spring-config.xml" />
+	<import resource="classpath*:*-spring-config.xml" />
 </beans>
