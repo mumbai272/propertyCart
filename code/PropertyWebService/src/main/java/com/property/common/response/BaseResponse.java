@@ -10,18 +10,18 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "response")
 public class BaseResponse implements Serializable {
 
-    private String status;
+    public static final Long FAILED_CODE = -1L;
+
+    private String message;
 
     private Long statusCode;
 
-
-    public String getStatus() {
-        return status;
+    public String getMessage() {
+        return message;
     }
 
-
-    public void setStatus(String status) {
-        this.status = status;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
 

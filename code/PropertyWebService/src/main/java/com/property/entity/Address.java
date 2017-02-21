@@ -51,6 +51,8 @@ public class Address {
     @Column(name = "MAIL_ID", length = 100)
     private String mailId;
 
+    @Column(name = "CO_ORDINATE", length = 50)
+    private String coordinates;
 
     public Long getId() {
         return id;
@@ -169,6 +171,18 @@ public class Address {
 
     public void setMailId(String mailId) {
         this.mailId = mailId;
+    }
+
+
+    
+    public String getCoordinates() {
+        return coordinates;
+    }
+
+
+    
+    public void setCoordinates(String coordinates) {
+        this.coordinates = coordinates;
     }
 
 

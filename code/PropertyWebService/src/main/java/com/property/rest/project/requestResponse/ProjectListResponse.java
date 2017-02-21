@@ -1,7 +1,7 @@
 //============================================================
 //Copyright 2017, Drona, Inc. All rights reserved.
 //============================================================
-package com.property.rest.property.requestResponse;
+package com.property.rest.project.requestResponse;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -10,18 +10,20 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "response")
-public class PropertyListResponse implements Serializable {
+public class ProjectListResponse implements Serializable {
 
-    private List<PropertyDTO> properties = new ArrayList<>();
+    private List<ProjectDTO> projects = new ArrayList<>();
 
+    
+    public List<ProjectDTO> getProjects() {
+        return projects;
+    }
 
-    public List<PropertyDTO> getProperties() {
-        return properties;
+    
+    public void setProjects(List<ProjectDTO> projects) {
+        this.projects = projects;
     }
 
 
-    public void setProperties(List<PropertyDTO> properties) {
-        this.properties = properties;
-    }
 
 }
