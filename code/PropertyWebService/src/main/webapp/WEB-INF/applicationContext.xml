@@ -41,9 +41,9 @@
 		<jaxrs:providers>
 			<bean class="org.codehaus.jackson.jaxrs.JacksonJsonProvider" />
 			<bean class="org.apache.cxf.jaxrs.provider.JAXBElementProvider" />
-<!-- 			<bean class="com.property.common.exception.ValidationExceprionHandler" /> -->
-<!-- 			<bean class="com.property.common.exception.RuntimeExceptionHandler" /> -->
-<!-- 			<bean class="com.property.common.exception.ExceptionHandler" /> -->
+			<bean class="com.property.common.exception.ValidationExceprionHandler" />
+			<bean class="com.property.common.exception.RuntimeExceptionHandler" />
+			<bean class="com.property.common.exception.ExceptionHandler" />
 		</jaxrs:providers>
 	
 
