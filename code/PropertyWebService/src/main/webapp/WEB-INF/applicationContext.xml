@@ -15,38 +15,40 @@
  	http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa-1.0.xsd
  	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
     http://www.springframework.org/schema/tx  http://www.springframework.org/schema/tx/spring-tx-4.2.xsd">
-
+	
 	<aop:aspectj-autoproxy />
+	
 	<!-- to enable annotation -->
 	<context:annotation-config />
-	<context:component-scan base-package="com.property.*" />
+	<context:component-scan base-package="com.property.rest.*" />
+	
 	<!-- importing other resources -->
 	<import resource="classpath:META-INF/cxf/cxf.xml" />
 	<import resource="applicationJpa.xml" />
 	<import resource="application-utils.xml" />
 
-
 	<!--jAX-RS config -->
-	<jaxrs:server id="propertyWebService" address="/api">
+	<jaxrs:server id="webService" address="/api">
 		<jaxrs:inInterceptors>
 			<!-- DTO annotation validation config -->
-			<ref bean="validationInInterceptor" />
-			    
+			<ref bean="validationInInterceptor" />			    
 		</jaxrs:inInterceptors>
 		<jaxrs:serviceBeans>
 			<!-- rest api service config -->
-			<ref bean="propertyRestServiceImpl" />
-
+			<ref bean="projectRestServiceImpl" />
 		</jaxrs:serviceBeans>
-
+		
 		<jaxrs:providers>
 			<bean class="org.codehaus.jackson.jaxrs.JacksonJsonProvider" />
 			<bean class="org.apache.cxf.jaxrs.provider.JAXBElementProvider" />
-			<bean class="com.property.common.exception.ValidationExceprionHandler" />
-			<bean class="com.property.common.exception.RuntimeExceptionHandler" />
-			<bean class="com.property.common.exception.ExceptionHandler" />
-
+<!-- 			<bean class="com.property.common.exception.ValidationExceprionHandler" /> -->
+<!-- 			<bean class="com.property.common.exception.RuntimeExceptionHandler" /> -->
+<!-- 			<bean class="com.property.common.exception.ExceptionHandler" /> -->
 		</jaxrs:providers>
+	
+
+		
+		
 
 		<jaxrs:extensionMappings>
 			<entry key="json" value="application/json" />
@@ -58,6 +60,7 @@
 	<!-- bean validation example -->
 	<bean id="exceptionMapper"
 		class="org.apache.cxf.jaxrs.validation.ValidationExceptionMapper" />
+		
 	<bean id="validationProvider" class="org.apache.cxf.validation.BeanValidationProvider" />
 
 	<bean id="validationInInterceptor"
@@ -84,5 +87,4 @@
 		</property>
 		<property name="ignoreUnresolvablePlaceholders" value="true" />
 	</bean>
-	<import resource="classpath*:*-spring-config.xml" />
 </beans>

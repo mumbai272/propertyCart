@@ -11,13 +11,15 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.property.entity.Project;
-import com.property.rest.project.dao.ProjectDao;
+import com.property.repository.project.ProjectDao;
 import com.property.rest.project.requestResponse.ProjectDTO;
 import com.property.rest.project.requestResponse.ProjectListResponse;
 
 @Component
+@Transactional
 public class ProjectServiceImpl {
 
     private static final Logger logger = Logger.getLogger(ProjectServiceImpl.class);

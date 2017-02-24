@@ -15,10 +15,9 @@
     http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa-1.0.xsd
     http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
     http://www.springframework.org/schema/tx  http://www.springframework.org/schema/tx/spring-tx-4.2.xsd">
-	<!-- jpa repository scan -->
-	<jpa:repositories base-package="com.rest.repository" />
 
-	<!-- Hibernate Integration -->
+	<!-- jpa repository scan -->
+	<jpa:repositories base-package="com.property.repository.*" />
 
 
 	<!-- Connection pool -->
@@ -40,6 +39,7 @@
 
 	<bean id="hibernateJpaVendorAdapter"
 		class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
+		
 	<bean id="entityManagerFactory"
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 		<property name="dataSource" ref="poolDataSource" />

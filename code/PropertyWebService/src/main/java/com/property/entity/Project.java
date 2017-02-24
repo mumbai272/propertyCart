@@ -24,7 +24,7 @@ import javax.persistence.TableGenerator;
  * @author Vinayak Mumbai <vinayak.s.mumbai@gmail.com> Created on Feb 14, 2017
  */
 @Entity
-@Table(name = "PROPERTY")
+@Table(name = "PROJECT")
 public class Project extends AuditData {
 
     @Id

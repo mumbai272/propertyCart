@@ -15,12 +15,12 @@ import javax.persistence.UniqueConstraint;
 
 @Entity
 @Table(name = "PROJECT_DETAILS", uniqueConstraints = { @UniqueConstraint(columnNames = {
-        "PROJECT_ID", "VALUE" }, name = "unique_pId_value") })
+        "PROJECT_ID", "DETAIL_KEY" }, name="unique_project_id_detail_key") })
 public class ProjectDetails {
 
     @Id
     @GeneratedValue
-    private Long Id;
+    private Long id;
 
     @Column(name = "PROJECT_ID")
     private Long projectId;
@@ -29,24 +29,24 @@ public class ProjectDetails {
     @JoinColumn(name = "PROJECT_ID", insertable = false, updatable = false)
     private Project project;
 
-    @Column(name = "VALUE", nullable = false, length = 50)
-    private String value;
+    @Column(name = "DETAIL_VALUE", nullable = false)
+    private String detailValue;
 
-    @Column(name = "KEY", nullable = false)
-    private String key;
+    @Column(name = "DETAIL_KEY", nullable = false,length = 50)
+    private String detailKey;
 
-    
+        
     public Long getId() {
-        return Id;
-    }
+		return id;
+	}
 
-    
-    public void setId(Long id) {
-        Id = id;
-    }
 
-    
-    public Long getProjectId() {
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+
+	public Long getProjectId() {
         return projectId;
     }
 
@@ -65,25 +65,26 @@ public class ProjectDetails {
         this.project = project;
     }
 
-    
-    public String getValue() {
-        return value;
-    }
 
-    
-    public void setValue(String value) {
-        this.value = value;
-    }
+	public String getDetailValue() {
+		return detailValue;
+	}
 
-    
-    public String getKey() {
-        return key;
-    }
 
-    
-    public void setKey(String key) {
-        this.key = key;
-    }
+	public void setDetailValue(String detailValue) {
+		this.detailValue = detailValue;
+	}
+
+
+	public String getDetailKey() {
+		return detailKey;
+	}
+
+
+	public void setDetailKey(String detailKey) {
+		this.detailKey = detailKey;
+	}
+
     
    
 }

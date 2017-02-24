@@ -18,7 +18,6 @@ import com.property.rest.project.requestResponse.ProjectListResponse;
 import com.property.rest.project.service.ProjectServiceImpl;
 
 @Component
-@Path(value = "/project")
 public class ProjectRestServiceImpl {
 
     private static final Logger logger = Logger.getLogger(ProjectRestServiceImpl.class);
@@ -28,9 +27,10 @@ public class ProjectRestServiceImpl {
 
 
     @GET
+    @Path(value = "/project")
     @Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
     @Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-    private Response getCollection() {
+    public Response getCollection() {
         ProjectListResponse response = projectService.getPropertList();
         return Response.ok(response).build();
 
@@ -39,6 +39,6 @@ public class ProjectRestServiceImpl {
     // @GET
     // @Procedure({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
     // @Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-    // private getEntity() {}
+    // public getEntity() {}
 
 }
