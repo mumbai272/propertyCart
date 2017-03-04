@@ -7,6 +7,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class AddressDTO implements Serializable {
 	private String addressString;
+	private String locality;
 	private String city;
 	private String state;
 	private String country;
@@ -23,6 +24,14 @@ public class AddressDTO implements Serializable {
 		this.addressString = addressString;
 	}
 
+
+	public String getLocality() {
+		return locality;
+	}
+
+	public void setLocality(String locality) {
+		this.locality = locality;
+	}
 
 	public String getCity() {
 		return city;
