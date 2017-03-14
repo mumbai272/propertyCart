@@ -8,7 +8,6 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -54,8 +53,8 @@ public class Project extends AuditData {
 	@Column(name = "RATING")
 	private Long rating;
 
-	@OneToMany(targetEntity = ProjectDetails.class, mappedBy = "project", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	private List<ProjectDetails> projectDetails;
+	@OneToMany(targetEntity = Property.class, mappedBy = "project", cascade = CascadeType.ALL)
+	private List<Property> properies;
 
 	public Long getId() {
 		return id;
@@ -121,12 +120,13 @@ public class Project extends AuditData {
 		this.rating = rating;
 	}
 
-	public List<ProjectDetails> getProjectDetails() {
-		return projectDetails;
+	public List<Property> getProperies() {
+		return this.properies;
 	}
 
-	public void setProjectDetails(List<ProjectDetails> projectDetails) {
-		this.projectDetails = projectDetails;
+	public void setProperies(List<Property> properies) {
+		this.properies = properies;
 	}
 
+	
 }

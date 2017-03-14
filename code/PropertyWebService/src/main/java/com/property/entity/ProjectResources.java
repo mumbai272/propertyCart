@@ -1,8 +1,12 @@
 package com.property.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -11,7 +15,12 @@ public class ProjectResources {
 	@GeneratedValue
 	private Long id;
 	@NotNull
+	@Column(name = "PROJECT_ID", nullable = false)
 	private Long projectId;
+
+//	@ManyToOne(fetch = FetchType.LAZY)
+//	@JoinColumn(name = "PROJECT_ID", insertable = false, updatable = false)
+//	private Project project;
 	private String name;
 	private String resourceType;
 
@@ -46,5 +55,13 @@ public class ProjectResources {
 	public void setResourceType(String resourceType) {
 		this.resourceType = resourceType;
 	}
+
+//	public Project getProject() {
+//		return project;
+//	}
+//
+//	public void setProject(Project project) {
+//		this.project = project;
+//	}
 
 }

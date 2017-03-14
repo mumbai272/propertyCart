@@ -1,7 +1,7 @@
 //============================================================
 //Copyright 2017, Drona, Inc. All rights reserved.
 //============================================================
-package com.property.repository.project;
+package com.property.repository;
 
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Component;

@@ -4,6 +4,7 @@
 package com.property.rest.project.requestResponse;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessOrder;
 import javax.xml.bind.annotation.XmlAccessorOrder;
@@ -27,6 +28,9 @@ public class ProjectDTO implements Serializable {
 	private Long rating;
 
 	private AddressDTO address;
+
+	private List<PropertyDTO> properties;
+	private List<PropertyResourceDTO> resources;
 
 	public Long getId() {
 		return id;
@@ -82,6 +86,22 @@ public class ProjectDTO implements Serializable {
 
 	public void setAddress(AddressDTO address) {
 		this.address = address;
+	}
+
+	public List<PropertyDTO> getProperties() {
+		return properties;
+	}
+
+	public void setProperties(List<PropertyDTO> properties) {
+		this.properties = properties;
+	}
+
+	public List<PropertyResourceDTO> getResources() {
+		return resources;
+	}
+
+	public void setResources(List<PropertyResourceDTO> resources) {
+		this.resources = resources;
 	}
 
 }
