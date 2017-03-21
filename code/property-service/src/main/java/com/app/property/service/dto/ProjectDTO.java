@@ -7,6 +7,7 @@ public class ProjectDTO {
 	public boolean isNew;
 	public String title;
 	public long addressId;
+	private AddressDTO address;
 	public long userId;
 	
 	public Project toModel() {
@@ -32,4 +33,15 @@ public class ProjectDTO {
 		
 		return project;
 	}
+
+    
+    public AddressDTO getAddress() {
+        return address;
+    }
+
+    
+    public void setAddress(AddressDTO address) {
+        this.address = address;
+    }
+	
 }

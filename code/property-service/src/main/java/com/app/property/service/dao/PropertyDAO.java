@@ -26,7 +26,7 @@ public class PropertyDAO {
 	
 	@SuppressWarnings("unchecked")
 	public List<Property> getAll() {
-		return entityManager.createQuery("from ps_roperty").getResultList();
+		return entityManager.createQuery("from Property").getResultList();
 	}
 
 	public Property getNewProperties(String isNew) {
@@ -52,6 +52,9 @@ public class PropertyDAO {
 	public Project getByProjectId(long id) {
 		return entityManager.find(Project.class, id);
 	}
+	public List<Project> getAllProjects() {
+        return entityManager.createQuery("from Project").getResultList();
+    }
 	
 	@PersistenceContext
 	private EntityManager entityManager;
