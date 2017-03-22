@@ -26,7 +26,9 @@ import com.app.property.service.dto.WSOutputDTO;
 @Controller
 @RequestMapping("/project")
 public class ProjectService {
-
+	
+	@Autowired
+	private ProjectBO projectBO;
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	@ResponseBody
 	public WSOutputDTO<ProjectDTO> addProperty(@RequestBody ProjectDTO projectDTO) {
@@ -87,8 +89,8 @@ public class ProjectService {
     }
 	@RequestMapping(value = "/image/{imageId}", method = RequestMethod.GET)
     public void getProjectImage(@PathVariable("imageId") long imageId,  HttpServletResponse response) throws IOException {
-        File f = null;
-//                projectBO.getProjectImages(imageId);
+        File f =  projectBO.getProjectImages(imageId);
+        
         String mimeType = URLConnection.guessContentTypeFromName(f.getName());
         if(mimeType == null) {
             mimeType = "application/octet-stream";
@@ -105,7 +107,5 @@ public class ProjectService {
         FileCopyUtils.copy(inputStream, response.getOutputStream());
 
     }
-	
-	@Autowired
-	private ProjectBO projectBO;
+
 }

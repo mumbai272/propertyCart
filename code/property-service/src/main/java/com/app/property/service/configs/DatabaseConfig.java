@@ -86,7 +86,6 @@ public class DatabaseConfig {
 		return new PersistenceExceptionTranslationPostProcessor();
 	}
 	@Autowired
-
 	private Environment env;
 
 	@Autowired

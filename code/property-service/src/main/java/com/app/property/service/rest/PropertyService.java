@@ -16,7 +16,9 @@ import com.app.property.service.dto.WSOutputDTO;
 @Controller
 @RequestMapping("/property")
 public class PropertyService {
-
+	@Autowired
+	private PropertyBO propertyBO;
+	
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	@ResponseBody
 	public WSOutputDTO<PropertyDTO> addProperty(@RequestBody PropertyDTO propertyDTO) {
@@ -58,6 +60,5 @@ public class PropertyService {
 		return output;
 	}
 		
-	@Autowired
-	private PropertyBO propertyBO;
+	
 }
