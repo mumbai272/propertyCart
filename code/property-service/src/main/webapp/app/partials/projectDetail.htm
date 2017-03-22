@@ -7,7 +7,7 @@ Top rated properties </Strong>
 <hr/>
 </div>
 	<div class="col-md-4 active" style="margin-bottom:25px; margin-top:25px"
-		ng-repeat="project in projectList | orderBy: 'title'">
+		data-ng-repeat="project in projectList | orderBy: 'title'">
 		<div class="text-center">
 			<img src="images/default.jpg" width="325" height="245" style="margin-bottom:10px"/>
 			<div><strong>{{project.title}}</strong></div>

@@ -1,7 +1,6 @@
-var app = angular.module('propertyApp',['ngRoute']);
+var app = angular.module('propertyApp');
 app.controller('ProjectController',
-	function($scope, $rootScope,$routeParams, projectService) {
-	console.log($routeParams);
+	function($scope, $rootScope, projectService) {
 		init();
 		function init(){
 			projectService.getAllProjects(function(data){

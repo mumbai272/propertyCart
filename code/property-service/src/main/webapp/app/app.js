@@ -4,10 +4,6 @@ app.config(function($routeProvider) {
 	.when("/", {
 		controller : "ProjectController",
 		templateUrl : "app/partials/projectList.htm"
-		
-	}).when("/project/:projectId",{
-		controller : "ProjectController",
-		templateUrl : "app/partials/projectDetail.htm"
 	}).otherwise({
 		redirectTo : "/"
 	});
