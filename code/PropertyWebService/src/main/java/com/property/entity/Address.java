@@ -39,21 +39,6 @@ public class Address {
 	@Column(name = "ZIP_CODE", length = 50)
 	private String zipCode;
 
-	@Column(name = "PHONE_NO", length = 50)
-	private String phoneNo;
-
-	@Column(name = "MOBILE_NO", length = 50)
-	private String mobileNo;
-
-	@Column(name = "FAX_NO", length = 50)
-	private String faxNo;
-
-	@Column(name = "WEBSITE", length = 50)
-	private String website;
-
-	@Column(name = "MAIL_ID", length = 100)
-	private String mailId;
-
 	@Column(name = "CO_ORDINATE", length = 50)
 	private String coordinates;
 
@@ -115,50 +100,6 @@ public class Address {
 
 	public String getZipCode() {
 		return zipCode;
-	}
-
-	public void setZipCode(String zipCode) {
-		this.zipCode = zipCode;
-	}
-
-	public String getPhoneNo() {
-		return phoneNo;
-	}
-
-	public void setPhoneNo(String phoneNo) {
-		this.phoneNo = phoneNo;
-	}
-
-	public String getMobileNo() {
-		return mobileNo;
-	}
-
-	public void setMobileNo(String mobileNo) {
-		this.mobileNo = mobileNo;
-	}
-
-	public String getFaxNo() {
-		return faxNo;
-	}
-
-	public void setFaxNo(String faxNo) {
-		this.faxNo = faxNo;
-	}
-
-	public String getWebsite() {
-		return website;
-	}
-
-	public void setWebsite(String website) {
-		this.website = website;
-	}
-
-	public String getMailId() {
-		return mailId;
-	}
-
-	public void setMailId(String mailId) {
-		this.mailId = mailId;
 	}
 
 	public String getCoordinates() {

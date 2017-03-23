@@ -30,7 +30,7 @@ public class ProjectRestServiceImpl {
 	private static final Logger logger = Logger.getLogger(ProjectRestServiceImpl.class);
 
 	@Autowired
-	private ProjectServiceImpl projectService;
+	private ProjectServiceImpl projectServiceImpl;
 
 	/**
 	 * get the list of projects
@@ -42,7 +42,7 @@ public class ProjectRestServiceImpl {
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public Response getCollection() {
-		ProjectListResponse response = projectService.getProjectList();
+		ProjectListResponse response = projectServiceImpl.getProjectList();
 		return Response.ok(response).build();
 
 	}
@@ -51,7 +51,7 @@ public class ProjectRestServiceImpl {
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public Response getEntity(@Valid @NotNull @PathParam("projectId") Long projectId) {
-		ProjectDeatilsResponse response = projectService.getProjectDetails(projectId);
+		ProjectDeatilsResponse response = projectServiceImpl.getProjectDetails(projectId);
 		return Response.ok(response).build();
 
 	}
@@ -61,8 +61,8 @@ public class ProjectRestServiceImpl {
 	@Produces({ MediaType.APPLICATION_OCTET_STREAM })
 	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public Response getProjectResource(@PathParam("projectId") Long projectId, @PathParam("fileId") Long fileId) {
-		File file = projectService.getProjectResource(projectId, fileId);
-		ResponseBuilder response = Response.ok((Object)file);
+		File file = projectServiceImpl.getProjectResource(projectId, fileId);
+		ResponseBuilder response = Response.ok(file);
 		response.header("Content-Disposition", "attachment;filename=filename");
 
 		return response.build();

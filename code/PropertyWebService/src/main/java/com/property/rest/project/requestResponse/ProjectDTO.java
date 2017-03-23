@@ -6,102 +6,114 @@ package com.property.rest.project.requestResponse;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlAccessOrder;
-import javax.xml.bind.annotation.XmlAccessorOrder;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 @XmlRootElement
-@XmlType(propOrder = { "id", "projectName", "shortDesc", "startingPrice", "status", "rating", "address" })
+@XmlType(propOrder = { "id", "projectName", "shortDesc", "startingPrice", "status", "rating",
+        "address" })
 public class ProjectDTO implements Serializable {
 
-	private Long id;
+    private Long id;
 
-	private String projectName;
+    private String projectName;
 
-	private String shortDesc;
+    private String shortDesc;
 
-	private String startingPrice;
+    private String startingPrice;
 
-	private String status;
+    private String status;
 
-	private Long rating;
+    private Long rating;
 
-	private AddressDTO address;
+    private AddressDTO address;
 
-	private List<PropertyDTO> properties;
-	private List<PropertyResourceDTO> resources;
+    private String thumbnailUrl;
 
-	public Long getId() {
-		return id;
-	}
+    private List<PropertyDTO> properties;
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    private List<PropertyResourceDTO> resources;
 
-	public String getProjectName() {
-		return projectName;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public void setProjectName(String projectName) {
-		this.projectName = projectName;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public String getShortDesc() {
-		return shortDesc;
-	}
+    public String getProjectName() {
+        return projectName;
+    }
 
-	public void setShortDesc(String shortDesc) {
-		this.shortDesc = shortDesc;
-	}
+    public void setProjectName(String projectName) {
+        this.projectName = projectName;
+    }
 
-	public String getStatus() {
-		return status;
-	}
+    public String getShortDesc() {
+        return shortDesc;
+    }
 
-	public void setStatus(String status) {
-		this.status = status;
-	}
+    public void setShortDesc(String shortDesc) {
+        this.shortDesc = shortDesc;
+    }
 
-	public Long getRating() {
-		return rating;
-	}
+    public String getStatus() {
+        return status;
+    }
 
-	public void setRating(Long rating) {
-		this.rating = rating;
-	}
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
-	public String getStartingPrice() {
-		return startingPrice;
-	}
+    public Long getRating() {
+        return rating;
+    }
 
-	public void setStartingPrice(String startingPrice) {
-		this.startingPrice = startingPrice;
-	}
+    public void setRating(Long rating) {
+        this.rating = rating;
+    }
 
-	public AddressDTO getAddress() {
-		return address;
-	}
+    public String getStartingPrice() {
+        return startingPrice;
+    }
 
-	public void setAddress(AddressDTO address) {
-		this.address = address;
-	}
+    public void setStartingPrice(String startingPrice) {
+        this.startingPrice = startingPrice;
+    }
 
-	public List<PropertyDTO> getProperties() {
-		return properties;
-	}
+    public AddressDTO getAddress() {
+        return address;
+    }
 
-	public void setProperties(List<PropertyDTO> properties) {
-		this.properties = properties;
-	}
+    public void setAddress(AddressDTO address) {
+        this.address = address;
+    }
 
-	public List<PropertyResourceDTO> getResources() {
-		return resources;
-	}
+    public List<PropertyDTO> getProperties() {
+        return properties;
+    }
 
-	public void setResources(List<PropertyResourceDTO> resources) {
-		this.resources = resources;
-	}
+    public void setProperties(List<PropertyDTO> properties) {
+        this.properties = properties;
+    }
+
+    public List<PropertyResourceDTO> getResources() {
+        return resources;
+    }
+
+    public void setResources(List<PropertyResourceDTO> resources) {
+        this.resources = resources;
+    }
+
+    
+    public String getThumbnailUrl() {
+        return thumbnailUrl;
+    }
+
+    
+    public void setThumbnailUrl(String thumbnailUrl) {
+        this.thumbnailUrl = thumbnailUrl;
+    }
 
 }

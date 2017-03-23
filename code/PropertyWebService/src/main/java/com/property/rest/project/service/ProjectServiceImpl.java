@@ -78,7 +78,7 @@ public class ProjectServiceImpl {
 		AddressDTO address = new AddressDTO();
 		BeanUtils.copyProperties(project.getAddress(), address);
 		StringBuilder addressBuilder = new StringBuilder(project.getAddress().getStreet1()).append(", ")
-		        .append(project.getAddress().getStreet1());
+		        .append(project.getAddress().getStreet2());
 		address.setAddressString(addressBuilder.toString());
 		projectDto.setAddress(address);
 		return projectDto;

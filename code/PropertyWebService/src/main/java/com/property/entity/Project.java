@@ -9,13 +9,11 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.TableGenerator;
 
 /**
  * Entity for the project
@@ -27,17 +25,16 @@ import javax.persistence.TableGenerator;
 public class Project extends AuditData {
 
 	@Id
-	@TableGenerator(name = "tableGenerator", table = "primaryKeyTable", pkColumnName = "Id", pkColumnValue = "ProjectId_Next_Value", allocationSize = 1)
-	@GeneratedValue(strategy = GenerationType.TABLE, generator = "tableGenerator")
+	@GeneratedValue
 	private Long id;
 
-	@Column(name = "Project_Name", nullable = false, length = 100)
-	private String projectName;
+	@Column(name = "TITLE", nullable = false, length = 100)
+	private String title;
 
 	@Column(name = "SHORT_DESC", length = 150)
 	private String shortDesc;
 
-	@Column(name = "ADDRESS_ID", unique = true, nullable = false)
+	@Column(name = "ADDRESS_ID", nullable = false)
 	private Long addressId;
 
 	@ManyToOne()
@@ -63,16 +60,17 @@ public class Project extends AuditData {
 	public void setId(Long id) {
 		this.id = id;
 	}
+	
+    public String getTitle() {
+        return title;
+    }
 
-	public String getProjectName() {
-		return projectName;
-	}
+    
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
-	public void setProjectName(String projectName) {
-		this.projectName = projectName;
-	}
-
-	public String getShortDesc() {
+    public String getShortDesc() {
 		return shortDesc;
 	}
 

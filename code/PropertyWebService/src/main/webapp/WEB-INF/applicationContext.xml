@@ -28,7 +28,7 @@
 	<import resource="application-utils.xml" />
 
 	<!--jAX-RS config -->
-	<jaxrs:server id="webService" address="/api">
+	<jaxrs:server id="webService" address="/">
 		<jaxrs:inInterceptors>
 			<!-- DTO annotation validation config -->
 			<ref bean="validationInInterceptor" />			    

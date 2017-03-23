@@ -17,7 +17,7 @@
     http://www.springframework.org/schema/tx  http://www.springframework.org/schema/tx/spring-tx-4.2.xsd">
 
 	<!-- jpa repository scan -->
-	<jpa:repositories base-package="com.property.repository.*" />
+	<jpa:repositories base-package="com.property.repository" />
 
 
 	<!-- Connection pool -->
