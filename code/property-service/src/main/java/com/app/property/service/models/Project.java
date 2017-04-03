@@ -21,11 +21,8 @@ public class Project {
     private long id;
 
     @NotNull
-    private boolean isNew;
-
-    @NotNull
     private String title;
-
+    
     @NotNull
     @Column(name = "address_id", unique = true, nullable = false)
     private long addressId;
@@ -52,13 +49,8 @@ public class Project {
         this.id = id;
     }
 
-    public boolean isNew() {
-        return isNew;
-    }
-
-    public void setNew(boolean isNew) {
-        this.isNew = isNew;
-    }
+    
+    
 
     public String getTitle() {
         return title;
@@ -88,7 +80,7 @@ public class Project {
         ProjectDTO dto = new ProjectDTO();
         dto.id = this.id;
         dto.title = this.title;
-        dto.isNew = this.isNew;
+//        dto.isNew = this.isNew;
         dto.addressId = this.addressId;
         dto.userId = this.userId;
         dto.setAddress(this.address.toDTO());

@@ -1,5 +1,7 @@
 package com.app.property.service.rest;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -45,7 +47,19 @@ public class PropertyService {
 		}
 		return "Property succesfully updated!";
 	}
-
+	@RequestMapping( value="/{projectId}",method = RequestMethod.GET)
+    @ResponseBody
+    public WSOutputDTO<List<PropertyDTO>> getProperties(@PathVariable("projectId") long projectId) {
+        WSOutputDTO<List<PropertyDTO>> output = new WSOutputDTO<List<PropertyDTO>>();
+        
+        try {
+            output.setObject(propertyBO.getProperties(projectId));
+            output.setMessage("Property succesfully retrieved!");
+        } catch (Exception ex) {
+            output.setError(ex.getMessage());
+        }
+        return output;
+    }
 	@RequestMapping(value = "/get/{propertyId}", method = RequestMethod.GET)
 	@ResponseBody
 	public WSOutputDTO<PropertyOutputDTO> getProperty(@PathVariable("propertyId") long propertyId) {

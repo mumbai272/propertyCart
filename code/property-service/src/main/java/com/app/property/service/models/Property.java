@@ -15,104 +15,128 @@ import com.app.property.service.dto.PropertyOutputDTO;
 @Table(name = "ps_property")
 public class Property {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
 
-	@NotNull
-	private long bedrooms;
-	
-	@NotNull
-	private double price;
-	
-	@NotNull
-	@Column(name="is_new")
-	private boolean isNew;
-	
-	@NotNull
-	@Column(name="address_id")
-	private long addressId;
-	
-	@NotNull
-	@Column(name="project_id")
-	private long projectId;
-	
-	@NotNull
-	@Column(name="user_id")
-	private long userId;
-	
-	public long getId() {
-		return id;
-	}
+    @NotNull
+    private long bedrooms;
 
-	public void setId(long id) {
-		this.id = id;
-	}
+    @NotNull
+    private Long size;
 
-	public long getBedrooms() {
-		return bedrooms;
-	}
+    @NotNull
+    private double price;
 
-	public void setBedrooms(long bedrooms) {
-		this.bedrooms = bedrooms;
-	}
+    @NotNull
+    @Column(name = "is_new")
+    private Boolean isNew;
 
-	public double getPrice() {
-		return price;
-	}
+    @NotNull
+    @Column(name = "address_id")
+    private long addressId;
 
-	public void setPrice(double price) {
-		this.price = price;
-	}
+    @NotNull
+    @Column(name = "project_id")
+    private long projectId;
 
-	public boolean isNew() {
-		return isNew;
-	}
+    @NotNull
+    @Column(name = "user_id")
+    private long userId;
 
-	public void setNew(boolean isNew) {
-		this.isNew = isNew;
-	}
+    public long getId() {
+        return id;
+    }
 
-	public long getAddressId() {
-		return addressId;
-	}
+    public void setId(long id) {
+        this.id = id;
+    }
 
-	public void setAddressId(long addressId) {
-		this.addressId = addressId;
-	}
+    public long getBedrooms() {
+        return bedrooms;
+    }
 
-	public long getProjectId() {
-		return projectId;
-	}
+    public void setBedrooms(long bedrooms) {
+        this.bedrooms = bedrooms;
+    }
 
-	public void setProjectId(long project) {
-		this.projectId = project;
-	}
+    public double getPrice() {
+        return price;
+    }
 
-	public long getUserId() {
-		return userId;
-	}
+    public void setPrice(double price) {
+        this.price = price;
+    }
 
-	public void setUserId(long userId) {
-		this.userId = userId;
-	}
+    public Boolean isNew() {
+        return isNew;
+    }
 
-	public PropertyDTO toDTO() {
-		PropertyDTO dto = new PropertyDTO();
-		dto.id = this.id;
-		dto.bedrooms = this.bedrooms;
-		dto.price = this.price;
-		dto.isNew = this.isNew;
-		dto.addressId = this.addressId;
-		dto.projectId = this.projectId;
-		dto.userId = this.userId;
-		
-		return dto;
-	}
-	
-	public PropertyOutputDTO toOutputDTO() {
-		PropertyOutputDTO dto = new PropertyOutputDTO();
-		dto.property = this.toDTO();
-		return dto;
-	}
+    public void setNew(Boolean isNew) {
+        this.isNew = isNew;
+    }
+
+
+    public Boolean getIsNew() {
+        return isNew;
+    }
+
+
+    public void setIsNew(Boolean isNew) {
+        this.isNew = isNew;
+    }
+
+    public long getAddressId() {
+        return addressId;
+    }
+
+    public void setAddressId(long addressId) {
+        this.addressId = addressId;
+    }
+
+    public long getProjectId() {
+        return projectId;
+    }
+
+    public void setProjectId(long project) {
+        this.projectId = project;
+    }
+
+    public long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(long userId) {
+        this.userId = userId;
+    }
+
+    public PropertyDTO toDTO() {
+        PropertyDTO dto = new PropertyDTO();
+        dto.id = this.id;
+        dto.bedrooms = this.bedrooms;
+        dto.price = this.price;
+        dto.isNew = this.isNew;
+        dto.addressId = this.addressId;
+        dto.projectId = this.projectId;
+        dto.userId = this.userId;
+        dto.size = this.size;
+        return dto;
+    }
+
+    public PropertyOutputDTO toOutputDTO() {
+        PropertyOutputDTO dto = new PropertyOutputDTO();
+        dto.property = this.toDTO();
+        return dto;
+    }
+
+
+    public Long getSize() {
+        return size;
+    }
+
+
+    public void setSize(Long size) {
+        this.size = size;
+    }
+
 }

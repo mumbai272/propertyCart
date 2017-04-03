@@ -1,0 +1,124 @@
+
+<div class="row">
+	<div class="col-md-12">
+		<h1>
+			<Strong> Top rated properties </Strong>
+		</h1>
+		<hr />
+	</div>
+	<div class="col-md-3 active"
+		style="margin-bottom: 25px; margin-top: 25px"
+		data-ng-repeat="project in projectList | orderBy: 'title'">
+
+		<div class="text-center" data-toggle="modal"
+			data-target="#projectDetail" ng-click="getProjectDetail(project.id)">
+
+			<img ng-src="{{project.thumbnailImage}}" width="250" height="200"
+				style="margin-bottom: 10px" />
+			<div>
+				<strong>{{project.title}}</strong>
+			</div>
+			<div>{{project.address.area}}, {{project.address.city}}</div>
+<div class="home-titles second">{{project.status}}</div>
+		</div>
+
+	</div>
+
+</div>
+
+
+<div class="modal fade" id="projectDetail" role="dialog"
+	ng-show="project!=null">
+	<div class="modal-dialog">
+
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">{{project.title}}</h4>
+			</div>
+			<div class="modal-body">
+
+				<!-- images -->
+				<div id="myCarousel" class="carousel" data-ride="carousel">
+
+					<!-- Wrapper for slides -->
+					<div class="carousel-inner" role="listbox">
+
+<!-- 						<div class="item active"> -->
+<!-- 							<img ng-src="{{project.thumbnailImage}}" alt="Chania" /> -->
+<!-- 							<div class="carousel-caption"> -->
+<!-- 								<h4>{{project.title}}</h4> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+						<div class="item" ng-repeat="image in project.images " data-ng-class="{active : $first}">
+							<img ng-src="{{image.url}}" alt="image" />
+							<div class="carousel-caption">
+								<h4>{{image.imageName}}</h4>
+							</div>
+						</div>
+
+					</div>
+
+					<!-- Left and right controls -->
+					<a class="left carousel-control" href="#myCarousel" target="_self"
+						role="button" data-slide="prev"> <span
+						class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+						<span class="sr-only">Previous</span>
+					</a> <a class="right carousel-control" href="#myCarousel"
+						target="_self" role="button" data-slide="next"> <span
+						class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+						<span class="sr-only">Next</span>
+					</a>
+				</div>
+				<!-- tab -->
+				<ul class="nav nav-tabs">
+					<li class="active"><a data-toggle="tab" href="#home"
+						target="_self" >Location</a></li>
+					<li><a data-toggle="tab" href="#menu1" target="_self"
+						ng-click="getPropertyDetails(project.id)">Property Details</a></li>
+<!-- 					<li><a data-toggle="tab" href="#menu2" target="_self">Attachments</a></li> -->
+
+				</ul>
+
+				<div class="tab-content">
+					<!-- tab1 -->
+					<div id="home" class="tab-pane fade in active">
+						<h3>Address</h3>
+						<p>{{project.address.street}}, {{project.address.area}}</p>
+						<p>{{project.address.city}}, {{project.address.state}},
+							{{project.address.country}} - {{project.address.zipcode}}</p>
+<!-- 							ng-focus=plotOnMap(project.address.latitude,project.address.longitude) -->
+  <ng-map center="-25.363882,131.044922" zoom="4">
+    <marker position="-25.363882,131.044922" title="Hello World!"></marker>
+  </ng-map>					</div>
+					
+					<!-- tab2 -->
+					<div id="menu1" class="tab-pane fade">
+						<table class="table table-striped">
+							<thead>
+								<tr>
+									<th>Flat Type</th>
+									<th>Area SQ.FT</th>
+									<th>Price</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="property in properties">
+									<td>{{property.bedrooms}} BHK</td>
+									<td>{{property.size}} Sq. ft</td>
+									<td>{{property.price| currency:' &#8360 '}}</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+
+	</div>
+</div>

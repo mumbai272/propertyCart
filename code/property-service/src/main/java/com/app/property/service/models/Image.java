@@ -113,7 +113,7 @@ public class Image {
 		dto.setId(this.id);
 		dto.setType(this.type);
 		dto.setImageName(this.imageName);
-		dto.setUrl("api/project/image/"+this.id);
+		dto.setUrl("project/image/"+this.id);
 		return dto;
 	}
 	

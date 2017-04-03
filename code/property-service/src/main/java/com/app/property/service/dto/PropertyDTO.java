@@ -10,6 +10,7 @@ public class PropertyDTO {
 	public long addressId;
 	public long projectId;
 	public long userId;
+	public double size;
 	
 	public Property toModel() {
 		return updateModel(new Property());

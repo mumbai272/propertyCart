@@ -5,9 +5,17 @@ import java.util.List;
 
 import com.app.property.service.models.Project;
 
+/**
+ * @author Vinayak Mumbai <vinayak.s.mumbai@gmail.com>
+ * Created on Apr 2, 2017
+ */
+/**
+ * @author Vinayak Mumbai <vinayak.s.mumbai@gmail.com>
+ * Created on Apr 2, 2017
+ */
 public class ProjectDTO {
 	public long id;
-	public boolean isNew;
+	private String status;
 	public String title;
 	public long addressId;
 	public long userId;
@@ -15,7 +23,47 @@ public class ProjectDTO {
 	private String thumbnailImage;
 	private List<ImageDTO> images;
 
-	public AddressDTO getAddress() {
+	
+    public long getId() {
+        return id;
+    }
+
+    
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    
+    public String getTitle() {
+        return title;
+    }
+
+    
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    
+    public long getAddressId() {
+        return addressId;
+    }
+
+    
+    public void setAddressId(long addressId) {
+        this.addressId = addressId;
+    }
+
+    
+    public long getUserId() {
+        return userId;
+    }
+
+    
+    public void setUserId(long userId) {
+        this.userId = userId;
+    }
+
+    public AddressDTO getAddress() {
 		return address;
 	}
 
@@ -44,7 +92,7 @@ public class ProjectDTO {
 	}
 
 	public Project updateModel(Project project) {
-		project.setNew(this.isNew);
+//		project.setIsNew(this.isNew);
 		project.setTitle(this.title);
 		project.setAddressId(this.addressId);
 
@@ -69,5 +117,16 @@ public class ProjectDTO {
 		}
 		images.add(image);
 	}
+
+    
+    public String getStatus() {
+        return status;
+    }
+
+    
+    public void setStatus(String status) {
+        this.status = status;
+    }
+	
 
 }

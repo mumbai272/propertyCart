@@ -25,7 +25,9 @@ public class ImageDAO {
 	public List<Image> getImages(Long projectId){
 		return entityManager.createQuery("from Image i where i.project.id="+projectId).getResultList();
 	}
-
+    public List<Image> getImagesByType(Long projectId, String type) {
+        return entityManager.createQuery("from Image i where i.project.id=" + projectId + " and i.type='" + type+"'").getResultList();
+    }
 	public Image getImageByType(Long projectId, String type) {
 		return (Image)entityManager.createQuery("from Image i where i.project.id=" + projectId + " and i.type='" + type+"'").getResultList().get(0);
 	}

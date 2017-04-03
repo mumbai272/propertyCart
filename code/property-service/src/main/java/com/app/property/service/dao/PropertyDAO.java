@@ -37,6 +37,9 @@ public class PropertyDAO {
 	public Property getById(long id) {
 		return entityManager.find(Property.class, id);
 	}
+	public List<Property> getPropertiesByProjectId(long id) {
+	    return  entityManager.createQuery("from Property where projectId = :projectId")
+                .setParameter("projectId", id).getResultList();  }
 	
 	
 	

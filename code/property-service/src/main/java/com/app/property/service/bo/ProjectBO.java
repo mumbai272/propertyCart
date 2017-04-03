@@ -6,6 +6,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Resource;
+
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Repository;
@@ -20,7 +23,7 @@ import com.app.property.service.models.Project;
 @Repository
 public class ProjectBO {
 
-    private static final String IMAGE_API = "api/project/image/";
+    private static final String IMAGE_API = "project/image/";
 
     @Autowired
     private PropertyDAO propertyDAO;
@@ -30,6 +33,9 @@ public class ProjectBO {
 
     @Autowired
     private Environment env;
+
+    @Resource(name = "statusMap")
+    private Map<Long, String> statusMap;
 
     public ProjectDTO addProperty(ProjectDTO dto) {
         if (dto.userId <= 0) {
@@ -73,7 +79,13 @@ public class ProjectBO {
         ProjectDTO dto = project.toDTO();
         List<Image> images = imageDAO.getImages(dto.id);
         for (Image image : images) {
-            dto.addImages(image.toDTO());
+//            if ("thumbnail".equalsIgnoreCase(image.getType())) {
+//                StringBuilder url = new StringBuilder(IMAGE_API).append(image.getId());
+//                dto.setThumbnailImage(url.toString());
+//
+//            } else {
+                dto.addImages(image.toDTO());
+//            }
         }
         return dto;
     }
@@ -88,7 +100,7 @@ public class ProjectBO {
         List<Long> projectIds = new ArrayList<>();
         for (Project project : projects) {
             projectIds.add(project.getId());
-            projectDTOs.add(project.toDTO());
+            projectDTOs.add(toDTO(project));
         }
         List<Image> thumbenails = imageDAO.getImagesByType(projectIds, "thumbnail");
         if (!CollectionUtils.isEmpty(thumbenails)) {
@@ -131,6 +143,14 @@ public class ProjectBO {
             throw new RuntimeException("image does not exist");
         }
         return f;
+    }
+
+    public ProjectDTO toDTO(Project project) {
+        ProjectDTO dto = new ProjectDTO();
+        BeanUtils.copyProperties(project, dto);
+        dto.setStatus(statusMap.get(project.getStatus()));
+        dto.setAddress(project.getAddress().toDTO());
+        return dto;
     }
 
 }
