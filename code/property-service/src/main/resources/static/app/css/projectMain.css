@@ -1,0 +1,44 @@
+body {
+    font-family: 'Source Serif Pro', serif;
+    font-size: 14px;
+}
+
+.active:hover {
+    background-color: #f2f2f2;
+    cursor: pointer;
+}
+
+.carousel-inner>.item>img, .carousel-inner>.item>a>img {
+    width: 100%;
+    margin: auto;
+    height:460px;
+    margin-bottom:20px;
+    
+}
+.home-titles {
+    background: url(images/title-bg.png) repeat scroll 0 0;
+    position: absolute;
+    bottom: 50px;
+    width: 86%;
+    height: 40px;
+    color: #fff;
+    padding-top: 10px;
+    padding-left: 10px;
+    text-align: left;
+    margin-left: 5px;
+    font-size: 16px;
+   }
+
+#projectDetail .modal-dialog  {width:70%;}
+#addProject .modal-dialog  {width:50%;}
+.font-icon{
+	font-size: 16px;
+	margin: 2px 6px;
+}
+.font-icon:hover {
+	cursor: pointer;
+	color: #337ab7
+}
+.btn{
+	margin-bottom:5px;
+}

@@ -9,14 +9,11 @@ import com.app.property.service.models.Project;
  * @author Vinayak Mumbai <vinayak.s.mumbai@gmail.com>
  * Created on Apr 2, 2017
  */
-/**
- * @author Vinayak Mumbai <vinayak.s.mumbai@gmail.com>
- * Created on Apr 2, 2017
- */
 public class ProjectDTO {
 	public long id;
 	private String status;
 	public String title;
+	private String startingPrice;
 	public long addressId;
 	public long userId;
 	private AddressDTO address;
@@ -44,6 +41,18 @@ public class ProjectDTO {
     }
 
     
+    
+    public String getStartingPrice() {
+        return startingPrice;
+    }
+
+
+    
+    public void setStartingPrice(String startingPrice) {
+        this.startingPrice = startingPrice;
+    }
+
+
     public long getAddressId() {
         return addressId;
     }

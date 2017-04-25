@@ -7,5 +7,8 @@ app.config(function($routeProvider) {
 				}).when('/details', {
 				    templateUrl: 'app/partials/projectDetail.htm',
 				    controller: 'ProjectController'
+				}).when('/admin/add', {
+				    templateUrl: 'app/partials/projectManage.htm',
+				    controller: 'ProjectController'
 				});
 });
