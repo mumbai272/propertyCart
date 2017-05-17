@@ -107,4 +107,13 @@ public class DatabaseConfig {
         return statusMap;
 
     }
+    @Bean(name = "statusToIdMap")
+    public Map<String, Long> statusMap() {
+        Map<String, Long> statusMap = new HashMap<>();
+        statusMap.put("Prelaunching",1L);
+        statusMap.put("Under Construction",2L);
+        statusMap.put("Ready Possession",3L);
+        return statusMap;
+
+    }
 }

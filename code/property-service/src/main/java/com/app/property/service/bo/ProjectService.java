@@ -11,22 +11,26 @@ import javax.annotation.Resource;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import com.app.property.service.dao.ImageDAO;
 import com.app.property.service.dao.PropertyDAO;
+import com.app.property.service.dto.AddressDTO;
 import com.app.property.service.dto.ProjectDTO;
 import com.app.property.service.models.Image;
 import com.app.property.service.models.Project;
 
-@Repository
-public class ProjectBO {
+@Service
+public class ProjectService {
 
     private static final String IMAGE_API = "project/image/";
 
     @Autowired
     private PropertyDAO propertyDAO;
+
+    @Autowired
+    private AddressBO addressBO;
 
     @Autowired
     private ImageDAO imageDAO;
@@ -37,38 +41,40 @@ public class ProjectBO {
     @Resource(name = "statusMap")
     private Map<Long, String> statusMap;
 
+    @Resource(name = "statusToIdMap")
+    private Map<String, Long> statusToIdMap;
+
+    public ProjectDTO addProject(ProjectDTO dto) {
+        AddressDTO address = addressBO.addAddress(dto.getAddress());
+        dto.setUserId(1);
+        dto.setAddressId(address.id);
+        Project project = toModel(dto);
+        project.setStatus(statusToIdMap.get(dto.getStatus()));
+        return toDTO(propertyDAO.addProject(project));
+    }
+
+
     public ProjectDTO addProperty(ProjectDTO dto) {
-        if (dto.userId <= 0) {
+        if (dto.getUserId() <= 0) {
             throw new RuntimeException("Missing user id");
         }
-
-        if (dto.addressId <= 0) {
+        if (dto.getAddressId() <= 0) {
             throw new RuntimeException("Missing address id");
         }
 
-        return propertyDAO.addProject(dto.toModel()).toDTO();
+        return toDTO(propertyDAO.addProject(toModel(dto)));
     }
 
     public ProjectDTO updateProject(ProjectDTO dto) {
-        Project project = propertyDAO.getByProjectId(dto.id);
-        if (project.getId() == dto.id) {
-            project = dto.updateModel(project);
+        Project project = propertyDAO.getByProjectId(dto.getId());
+        if (project.getId() == dto.getId()) {
+            project = updateModel(dto);
             propertyDAO.update(project);
         }
-        return project.toDTO();
+        return toDTO(project);
     }
 
-    public ProjectDTO addProject(ProjectDTO dto) {
-        if (dto.userId <= 0) {
-            throw new RuntimeException("Missing user id");
-        }
 
-        if (dto.addressId <= 0) {
-            throw new RuntimeException("Missing address id");
-        }
-
-        return propertyDAO.addProject(dto.toModel()).toDTO();
-    }
 
     public ProjectDTO getProject(long projectId) throws Exception {
         Project project = propertyDAO.getByProjectId(projectId);
@@ -76,16 +82,10 @@ public class ProjectBO {
         if (project == null) {
             throw new RuntimeException("Invalid project id : " + projectId);
         }
-        ProjectDTO dto = project.toDTO();
-        List<Image> images = imageDAO.getImages(dto.id);
+        ProjectDTO dto = toDTO(project);
+        List<Image> images = imageDAO.getImages(dto.getId());
         for (Image image : images) {
-//            if ("thumbnail".equalsIgnoreCase(image.getType())) {
-//                StringBuilder url = new StringBuilder(IMAGE_API).append(image.getId());
-//                dto.setThumbnailImage(url.toString());
-//
-//            } else {
-                dto.addImages(image.toDTO());
-//            }
+            dto.addImages(image.toDTO());
         }
         return dto;
     }
@@ -108,8 +108,8 @@ public class ProjectBO {
             Map<Long, String> map = buildMapOfThumbnails(thumbenails);
             for (ProjectDTO dto : projectDTOs) {
                 String url = "images/default.jpg";
-                if (map.containsKey(dto.id)) {
-                    url = map.get(dto.id);
+                if (map.containsKey(dto.getId())) {
+                    url = map.get(dto.getId());
                 }
                 dto.setThumbnailImage(url);
             }
@@ -153,4 +153,15 @@ public class ProjectBO {
         return dto;
     }
 
+    public Project toModel(ProjectDTO dto) {
+        return updateModel(dto);
+    }
+
+    public Project updateModel(ProjectDTO dto) {
+        Project project = new Project();
+        BeanUtils.copyProperties(dto, project);
+        project.setStatus(statusToIdMap.get(dto.getStatus()));
+        // project.setAddress(dto.getAddress().toModel());
+        return project;
+    }
 }

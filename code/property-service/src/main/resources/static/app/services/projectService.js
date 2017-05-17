@@ -16,6 +16,19 @@ app.factory('projectService',
                       }
                   );
           }
+        factory.addProject = function(data,success,error){ 
+
+            $http.post('project/add',data).then(function(response,status){
+                   if(success){
+                        success(response.data.object);
+                      }
+                  },function(response,status){
+                    if(error){
+                        error(response.data.message);
+                      }     
+                    }
+                );
+        }
         factory.getProjectById = function(projectId,success,error){ 
 
             $http.get('project/get/'+projectId).then(function(response,status){

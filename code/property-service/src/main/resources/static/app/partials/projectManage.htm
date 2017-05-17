@@ -33,11 +33,14 @@
 					<td>{{project.startingPrice}}</td>
 					<td>{{project.address.area}}, {{ project.address.street }}</td>
 					<td>{{project.address.city}}, {{ project.address.state }}, {{ project.address.country }}</td>
-					<td><span class="font-icon"><i class="fa fa-pencil"
-							aria-hidden="true" data-toggle="tooltip" data-placement="top"
-							title="Edit Project"></i></span> <span class="font-icon"><i
-							class="fa fa-plus-circle" aria-hidden="true"
-							title="Add Properties"></i></span></td>
+					<td>
+						<span class="font-icon">
+						   <i class="fa fa-pencil"	aria-hidden="true" title="Edit Project"></i>
+						</span> 
+						<span class="font-icon"> 
+						   <i class="fa fa-plus-circle" aria-hidden="true" title="Add Properties"></i>
+						</span>
+					</td>
 				</tr>
 			</tbody>
 		</table>
@@ -56,23 +59,34 @@
 				</div>
 				<div class="modal-body">
 
-					<form class="form-horizontal">
+					<form class="form-horizontal" name="projectForm">
 						<div class="form-group">
 							<div class="col-sm-8">
-								<input type="text" class="form-control" id="title"
-									placeholder="Enter Project Title">
+								<input type="text" class="form-control" name="title" data-ng-model="newProject.title"
+									placeholder="Enter Project Title" required>
+<!-- 									<span style="color:red" ng-show="projectForm.title.$dirty && projectForm.title.$invalid"> -->
+<!--                                          <span ng-show="projectForm.title.$error.required">Title is required.</span> -->
+<!--                                     </span> -->
 							</div>
 						</div>
 						<div class="form-group">
 							<div class="col-sm-8">
-								<input type="text" class="form-control" id="price"
-									placeholder="Enter Starting price">
+								<input type="text" class="form-control" id="price" data-ng-model="newProject.startingPrice"
+									placeholder="Enter Starting price" required>
 							</div>
 						</div>
 						<div class="form-group">
 							<div class="col-sm-8">
-								<input type="text" class="form-control" id="status"
-									placeholder="Select Status">
+<!-- 							<select class="form-control" data-ng-model="newProject.status"> -->
+<!-- 							     <option>Select Status</option> -->
+<!--                                  <option ng-repeat="status in statusList">{{status}}</option> -->
+<!--                             </select> -->
+							
+								<select  class="form-control" name="status" data-ng-model="newProject.status" ng-options="status for status in statusList" required>
+                                </select>
+<!--                                 <span style="color:red" ng-show="projectForm.status.$dirty && projectForm.status.$invalid"> -->
+<!--                                          <span ng-show="projectForm.status.$error.required">Status is required.</span> -->
+<!--                                     </span> -->
 							</div>
 						</div>
 						<div class="row">
@@ -85,44 +99,44 @@
 						</div>
 						<div class="form-group">
 							<div class="col-sm-8">
-								<input type="text" class="form-control" id="title"
-									placeholder="Enter Project Area">
+								<input type="text" class="form-control" id="area" data-ng-model="newProject.address.street"
+									placeholder="Enter Project Area" required>
 							</div>
 						</div>
 						<div class="form-group">
 							<div class="col-sm-8">
-								<input type="text" class="form-control" id="price"
-									placeholder="Enter Project locality">
+								<input type="text" class="form-control" id="locality" data-ng-model="newProject.address.area"
+									placeholder="Enter Project locality" required>
 							</div>
 						</div>
 						<div class="form-group">
 							<div class="col-sm-8">
-								<input type="text" class="form-control" id="status"
-									placeholder="Enter City">
+								<input type="text" class="form-control" id="city"  data-ng-model="newProject.address.city"
+									placeholder="Enter City" required>
 							</div>
 						</div>
 						<div class="form-group">
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" id="status"
-                                    placeholder="Enter State">
+                                <input type="text" class="form-control" id="state" data-ng-model="newProject.address.state"
+                                    placeholder="Enter State" required>
                             </div>
                         </div>
 						<div class="form-group">
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" id="status"
-                                    placeholder="Enter Country">
+                                <input type="text" class="form-control" id="country" data-ng-model="newProject.address.country"
+                                    placeholder="Enter Country" required>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" id="status"
+                                <input type="text" class="form-control" id="zipcode" data-ng-model="newProject.address.zipcode"
                                     placeholder="Enter Zipcode">
                             </div>
                         </div>
 
 						<div class="form-group">
 							<div class="col-sm-4">
-								<button type="submit" class="btn btn-info">Add project</button>
+								<button type="submit" class="btn btn-info" data-ng-click="addProject(newProject)">Add project</button>
 							</div>
 							<div class="col-sm-4">
 								<button type="button" class="btn btn-default"
