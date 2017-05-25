@@ -40,9 +40,19 @@ app.controller('ProjectController',
 					$scope.msg = msg;
 				});
 			}
-			$scope.updateProject = function(project) {
+			$scope.editProject = function(project) {
 				$('#addProject').modal('show');
 				$scope.newProject = project;
+			}
+			$scope.updateProject = function(project) {
+				
+				projectService.updateProject(angular.toJson(project), function(
+						data) {
+					getAllProjects();
+					$scope.msg = "project updated successfully";
+				}, function(msg) {
+					$scope.msg = msg;
+				});
 			}
 			$scope.plotOnMap = function(lat, long) {
 

@@ -9,6 +9,8 @@ import com.app.property.service.models.Address;
 
 @Repository
 public class AddressService {
+    @Autowired
+    private AddressDAO addressDAO;
 
 	public AddressDTO getAddress(long addressId) throws Exception {
 		Address address = addressDAO.getById(addressId);
@@ -33,7 +35,6 @@ public class AddressService {
 		return address.toDTO();
 	}
 
-	@Autowired
-	private AddressDAO addressDAO;
+	
 
 }

@@ -70,8 +70,9 @@ public class ProjectService {
         if (project.getId() == dto.getId()) {
             project = updateModel(dto);
             propertyDAO.update(project);
+            addressBO.updateAddress(dto.getAddress());
         }
-        return toDTO(project);
+        return dto;
     }
 
 

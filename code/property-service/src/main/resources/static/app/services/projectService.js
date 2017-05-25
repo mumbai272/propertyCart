@@ -30,6 +30,20 @@ app.factory('projectService',
                     }
                 );
         }
+        factory.updateProject = function(data,success,error){ 
+
+            $http.put('project',data).then(function(response,status){
+                   if(success){
+                        success(response.data.data);
+                        $('#addProject').modal('hide');
+                      }
+                  },function(response,status){
+                    if(error){
+                        error(response.data.message);
+                      }     
+                    }
+                );
+        }
         factory.getProjectById = function(projectId,success,error){ 
 
             $http.get('project/'+projectId).then(function(response,status){

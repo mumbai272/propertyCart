@@ -47,15 +47,16 @@ public class ProjectRestService {
 
     @RequestMapping(method = RequestMethod.PUT)
     @ResponseBody
-    public String updateProject(@RequestBody ProjectDTO projectDTO) {
+    public BaseResponse<ProjectDTO> updateProject(@RequestBody ProjectDTO projectDTO) {
         BaseResponse<ProjectDTO> output = new BaseResponse<ProjectDTO>();
 
         try {
             output.setData(projectService.updateProject(projectDTO));
+            output.setMessage("Property succesfully updated!");
         } catch (Exception ex) {
-            return ex.toString();
+            output.setError(ex.getMessage());
         }
-        return "Project succesfully updated!";
+        return output;
     }
 
     @RequestMapping(value = "/{projectId}", method = RequestMethod.GET)
