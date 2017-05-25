@@ -1,4 +1,4 @@
-package com.app.property.service.bo;
+package com.app.property.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -8,7 +8,7 @@ import com.app.property.service.dto.AddressDTO;
 import com.app.property.service.models.Address;
 
 @Repository
-public class AddressBO {
+public class AddressService {
 
 	public AddressDTO getAddress(long addressId) throws Exception {
 		Address address = addressDAO.getById(addressId);

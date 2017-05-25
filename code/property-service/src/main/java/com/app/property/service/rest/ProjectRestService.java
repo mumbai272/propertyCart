@@ -19,9 +19,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.app.property.service.bo.ProjectService;
+import com.app.property.service.ProjectService;
+import com.app.property.service.dto.BaseResponse;
 import com.app.property.service.dto.ProjectDTO;
-import com.app.property.service.dto.WSOutputDTO;
 
 @Controller
 @RequestMapping("/project")
@@ -32,11 +32,11 @@ public class ProjectRestService {
 
     @RequestMapping(method = RequestMethod.POST)
     @ResponseBody
-    public WSOutputDTO<ProjectDTO> createProperty(@RequestBody ProjectDTO projectDTO) {
-        WSOutputDTO<ProjectDTO> output = new WSOutputDTO<ProjectDTO>();
+    public BaseResponse<ProjectDTO> createProject(@RequestBody ProjectDTO projectDTO) {
+        BaseResponse<ProjectDTO> output = new BaseResponse<ProjectDTO>();
 
         try {
-            output.setObject(projectService.addProject(projectDTO));
+            output.setData(projectService.addProject(projectDTO));
             output.setMessage("Property succesfully added!");
         } catch (Exception ex) {
             output.setError("Error - adding the Project");
@@ -48,10 +48,10 @@ public class ProjectRestService {
     @RequestMapping(method = RequestMethod.PUT)
     @ResponseBody
     public String updateProject(@RequestBody ProjectDTO projectDTO) {
-        WSOutputDTO<ProjectDTO> output = new WSOutputDTO<ProjectDTO>();
+        BaseResponse<ProjectDTO> output = new BaseResponse<ProjectDTO>();
 
         try {
-            output.setObject(projectService.updateProject(projectDTO));
+            output.setData(projectService.updateProject(projectDTO));
         } catch (Exception ex) {
             return ex.toString();
         }
@@ -60,11 +60,11 @@ public class ProjectRestService {
 
     @RequestMapping(value = "/{projectId}", method = RequestMethod.GET)
     @ResponseBody
-    public WSOutputDTO<ProjectDTO> getProject(@PathVariable("projectId") long projectId) {
-        WSOutputDTO<ProjectDTO> output = new WSOutputDTO<ProjectDTO>();
+    public BaseResponse<ProjectDTO> getProject(@PathVariable("projectId") long projectId) {
+        BaseResponse<ProjectDTO> output = new BaseResponse<ProjectDTO>();
 
         try {
-            output.setObject(projectService.getProject(projectId));
+            output.setData(projectService.getProject(projectId));
             output.setMessage("Property succesfully retrieved!");
         } catch (Exception ex) {
             output.setError(ex.getMessage());
@@ -79,11 +79,11 @@ public class ProjectRestService {
      */
     @RequestMapping(method = RequestMethod.GET)
     @ResponseBody
-    public WSOutputDTO<List<ProjectDTO>> getProjects() {
-        WSOutputDTO<List<ProjectDTO>> output = new WSOutputDTO<List<ProjectDTO>>();
+    public BaseResponse<List<ProjectDTO>> getProjects() {
+        BaseResponse<List<ProjectDTO>> output = new BaseResponse<List<ProjectDTO>>();
 
         try {
-            output.setObject(projectService.getProjects());
+            output.setData(projectService.getProjects());
             output.setMessage("Property succesfully retrieved!");
         } catch (Exception ex) {
             output.setError(ex.getMessage());

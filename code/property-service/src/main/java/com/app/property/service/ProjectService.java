@@ -1,4 +1,4 @@
-package com.app.property.service.bo;
+package com.app.property.service;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -30,7 +30,7 @@ public class ProjectService {
     private PropertyDAO propertyDAO;
 
     @Autowired
-    private AddressBO addressBO;
+    private AddressService addressBO;
 
     @Autowired
     private ImageDAO imageDAO;

@@ -1,4 +1,4 @@
-package com.app.property.service.bo;
+package com.app.property.service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,14 +8,19 @@ import org.springframework.stereotype.Repository;
 
 import com.app.property.service.dao.AddressDAO;
 import com.app.property.service.dao.PropertyDAO;
-import com.app.property.service.dto.ProjectDTO;
 import com.app.property.service.dto.PropertyDTO;
 import com.app.property.service.dto.PropertyOutputDTO;
 import com.app.property.service.models.Address;
 import com.app.property.service.models.Property;
 
 @Repository
-public class PropertyBO {
+public class PropertyService {
+
+    @Autowired
+    private PropertyDAO propertyDAO;
+
+    @Autowired
+    private AddressDAO addressDAO;
 
     public PropertyOutputDTO getProperty(long propertyId) throws Exception {
         Property property = propertyDAO.getById(propertyId);
@@ -68,22 +73,18 @@ public class PropertyBO {
     }
 
 
-    public ProjectDTO addProject(ProjectDTO dto) {
-        if (dto.userId <= 0) {
-            throw new RuntimeException("Missing user id");
-        }
+    // public ProjectDTO addProject(ProjectDTO dto) {
+    // if (dto.getUserId() <= 0) {
+    // throw new RuntimeException("Missing user id");
+    // }
+    //
+    // if (dto.getAddressId() <= 0) {
+    // throw new RuntimeException("Missing address id");
+    // }
+    //
+    // return propertyDAO.addProject(dto.toModel).toDTO();
+    // }
 
-        if (dto.addressId <= 0) {
-            throw new RuntimeException("Missing address id");
-        }
 
-        return propertyDAO.addProject(dto.toModel()).toDTO();
-    }
-
-    @Autowired
-    private PropertyDAO propertyDAO;
-
-    @Autowired
-    private AddressDAO addressDAO;
 
 }

@@ -8,7 +8,7 @@ app.controller('ProjectController',
 				getAllProjects();
 				console.log("got the :" + $scope.projectList);
 			}
-			function getAllProjects (){
+			function getAllProjects() {
 				projectService.getAllProjects(function(data) {
 					$scope.projectList = data;
 				}, function(msg) {
@@ -32,14 +32,18 @@ app.controller('ProjectController',
 			}
 			$scope.addProject = function(newProject) {
 				console.log(angular.toJson(newProject));
-				projectService.addProject(angular.toJson(newProject),function(data){
+				projectService.addProject(angular.toJson(newProject), function(
+						data) {
 					getAllProjects();
-					$scope.msg="project added successfully";
-				},function(msg) {
+					$scope.msg = "project added successfully";
+				}, function(msg) {
 					$scope.msg = msg;
 				});
 			}
-
+			$scope.updateProject = function(project) {
+				$('#addProject').modal('show');
+				$scope.newProject = project;
+			}
 			$scope.plotOnMap = function(lat, long) {
 
 				var myOptions = {

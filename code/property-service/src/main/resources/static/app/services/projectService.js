@@ -7,7 +7,7 @@ app.factory('projectService',
 
               $http.get('project').then(function(response,status){
                      if(success){
-                          success(response.data.object);
+                          success(response.data.data);
                         }
                     },function(response,status){
                       if(error){
@@ -18,9 +18,10 @@ app.factory('projectService',
           }
         factory.addProject = function(data,success,error){ 
 
-            $http.post('project/add',data).then(function(response,status){
+            $http.post('project',data).then(function(response,status){
                    if(success){
-                        success(response.data.object);
+                        success(response.data.data);
+                        $('#addProject').modal('hide');
                       }
                   },function(response,status){
                     if(error){
@@ -31,9 +32,9 @@ app.factory('projectService',
         }
         factory.getProjectById = function(projectId,success,error){ 
 
-            $http.get('project/get/'+projectId).then(function(response,status){
+            $http.get('project/'+projectId).then(function(response,status){
                    if(success){
-                        success(response.data.object);
+                        success(response.data.data);
                       }
                   },function(response,status){
                     if(error){
@@ -46,7 +47,8 @@ app.factory('projectService',
 
             $http.get('property/'+projectId).then(function(response,status){
                    if(success){
-                        success(response.data.object);
+                        success(response.data.data);             
+                        
                       }
                   },function(response,status){
                     if(error){
