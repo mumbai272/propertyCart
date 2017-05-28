@@ -1,7 +1,5 @@
 package com.app.property.service.rest;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,7 +20,7 @@ public class PropertyRestService {
     @Autowired
     private PropertyService PropertyService;
 
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST)
     @ResponseBody
     public BaseResponse<PropertyDTO> addProperty(@RequestBody PropertyDTO propertyDTO) {
         BaseResponse<PropertyDTO> output = new BaseResponse<PropertyDTO>();
@@ -37,7 +35,7 @@ public class PropertyRestService {
         return output;
     }
 
-    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST)
     @ResponseBody
     public String updateProperty(@RequestBody PropertyDTO propertyDTO) {
         try {
@@ -49,21 +47,7 @@ public class PropertyRestService {
         return "Property succesfully updated!";
     }
 
-    @RequestMapping(value = "/{projectId}", method = RequestMethod.GET)
-    @ResponseBody
-    public BaseResponse<List<PropertyDTO>> getProperties(@PathVariable("projectId") long projectId) {
-        BaseResponse<List<PropertyDTO>> output = new BaseResponse<List<PropertyDTO>>();
-
-        try {
-            output.setData(PropertyService.getProperties(projectId));
-            output.setMessage("Property succesfully retrieved!");
-        } catch (Exception ex) {
-            output.setError(ex.getMessage());
-        }
-        return output;
-    }
-
-    @RequestMapping(value = "/get/{propertyId}", method = RequestMethod.GET)
+    @RequestMapping(value = "/{propertyId}", method = RequestMethod.GET)
     @ResponseBody
     public BaseResponse<PropertyOutputDTO> getProperty(@PathVariable("propertyId") long propertyId) {
         BaseResponse<PropertyOutputDTO> output = new BaseResponse<PropertyOutputDTO>();

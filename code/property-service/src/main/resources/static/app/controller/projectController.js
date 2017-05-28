@@ -1,6 +1,6 @@
 var app = angular.module('propertyApp');
 app.controller('ProjectController',
-		function($scope, $rootScope, projectService) {
+		function($scope, $rootScope, projectService,propertyService) {
 			$rootScope.statusList = [ "Prelaunching", "Under Construction",
 					"Ready Possession" ];
 			init();

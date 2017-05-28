@@ -1,6 +1,5 @@
 var app=angular.module('propertyApp');
-app.factory('projectService', 
-  function($http) {   
+app.factory('projectService', function($http) {   
   var projects=[];    
     var factory={};
         factory.getAllProjects = function(success,error){ 

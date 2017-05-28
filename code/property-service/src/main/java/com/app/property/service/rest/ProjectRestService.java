@@ -20,8 +20,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.app.property.service.ProjectService;
+import com.app.property.service.PropertyService;
 import com.app.property.service.dto.BaseResponse;
 import com.app.property.service.dto.ProjectDTO;
+import com.app.property.service.dto.PropertyDTO;
 
 @Controller
 @RequestMapping("/project")
@@ -29,6 +31,9 @@ public class ProjectRestService {
 
     @Autowired
     private ProjectService projectService;
+
+    @Autowired
+    private PropertyService PropertyService;
 
     @RequestMapping(method = RequestMethod.POST)
     @ResponseBody
@@ -85,6 +90,20 @@ public class ProjectRestService {
 
         try {
             output.setData(projectService.getProjects());
+            output.setMessage("Property succesfully retrieved!");
+        } catch (Exception ex) {
+            output.setError(ex.getMessage());
+        }
+        return output;
+    }
+
+    @RequestMapping(value = "/{projectId}/property", method = RequestMethod.GET)
+    @ResponseBody
+    public BaseResponse<List<PropertyDTO>> getProperties(@PathVariable("projectId") long projectId) {
+        BaseResponse<List<PropertyDTO>> output = new BaseResponse<List<PropertyDTO>>();
+
+        try {
+            output.setData(PropertyService.getProperties(projectId));
             output.setMessage("Property succesfully retrieved!");
         } catch (Exception ex) {
             output.setError(ex.getMessage());
