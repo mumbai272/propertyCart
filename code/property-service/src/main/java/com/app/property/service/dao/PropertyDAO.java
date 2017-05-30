@@ -15,50 +15,54 @@ import com.app.property.service.models.Property;
 @Transactional
 public class PropertyDAO {
 
-	public Property addProperty(Property property) {
-		entityManager.persist(property);
-		return property;
-	}
+    @PersistenceContext
+    private EntityManager entityManager;
 
-	public Property update(Property property) {
-		return entityManager.merge(property);
-	}
-	
-	@SuppressWarnings("unchecked")
-	public List<Property> getAll() {
-		return entityManager.createQuery("from Property").getResultList();
-	}
+    public Property addProperty(Property property) {
+        entityManager.persist(property);
+        return property;
+    }
 
-	public Property getNewProperties(String isNew) {
-		return (Property) entityManager.createQuery("from Property where isNew = :isNew")
-				.setParameter("isNew", isNew).getSingleResult();
-	}
+    public Property update(Property property) {
+        return entityManager.merge(property);
+    }
 
-	public Property getById(long id) {
-		return entityManager.find(Property.class, id);
-	}
-	public List<Property> getPropertiesByProjectId(long id) {
-	    return  entityManager.createQuery("from Property where projectId = :projectId")
-                .setParameter("projectId", id).getResultList();  }
-	
-	
-	
-	public Project update(Project project) {
-		return entityManager.merge(project);
-	}
+    @SuppressWarnings("unchecked")
+    public List<Property> getAll() {
+        return entityManager.createQuery("from Property").getResultList();
+    }
 
-	public Project addProject(Project project) {
-		entityManager.persist(project);
-		return project;
-	}
+    public Property getNewProperties(String isNew) {
+        return (Property) entityManager.createQuery("from Property where isNew = :isNew")
+                .setParameter("isNew", isNew).getSingleResult();
+    }
 
-	public Project getByProjectId(long id) {
-		return entityManager.find(Project.class, id);
-	}
-	public List<Project> getAllProjects() {
+    public Property getById(long id) {
+        return entityManager.find(Property.class, id);
+    }
+
+    public List<Property> getPropertiesByProjectId(long id) {
+        return entityManager.createQuery("from Property where projectId = :projectId")
+                .setParameter("projectId", id).getResultList();
+    }
+
+
+
+    public Project update(Project project) {
+        return entityManager.merge(project);
+    }
+
+    public Project addProject(Project project) {
+        entityManager.persist(project);
+        return project;
+    }
+
+    public Project getByProjectId(long id) {
+        return entityManager.find(Project.class, id);
+    }
+
+    public List<Project> getAllProjects() {
         return entityManager.createQuery("from Project").getResultList();
     }
-	
-	@PersistenceContext
-	private EntityManager entityManager;
+
 }

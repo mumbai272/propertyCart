@@ -1,163 +1,265 @@
 
 <div class="row">
-	<div class="col-md-12">
-		<h1>
-			<Strong> Manage Properties </Strong>
-		</h1>
-		<hr />
-	</div>
+    <div class="col-md-12">
+        <h1>
+            <Strong> Manage Properties </Strong>
+        </h1>
+        <hr />
+    </div>
 </div>
 <div class="row">
-	<div class="col-md-12">
-		<button type="button" class="btn btn-info pull-right"
-			data-toggle="modal" data-target="#addProject">Add Project</button>
-	</div>
+    <div class="col-md-12">
+        <button type="button" class="btn btn-info pull-right"
+            data-toggle="modal" data-target="#addProject">Add Project</button>
+    </div>
 </div>
 <div class="row">
-	<div class="col-md-12">
-		<table class="table table-striped table-bordered">
-			<thead class="center">
-				<tr>
-					<th>Title</th>
-					<th>Status</th>
-					<th>Staring Price</th>
-					<th>Locality</th>
-					<th>Address</th>
-					<th>Action</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr data-ng-repeat="project in projectList | orderBy: 'title'">
-					<td>{{project.title}}</td>
-					<td>{{project.status}}</td>
-					<td>{{project.startingPrice}}</td>
-					<td>{{project.address.area}}, {{ project.address.street }}</td>
-					<td>{{project.address.city}}, {{ project.address.state }}, {{ project.address.country }}</td>
-					<td>
-						<span class="font-icon" data-ng-click="editProject(project)">
-						   <i class="fa fa-pencil"	aria-hidden="true" title="Edit Project"></i>
-						</span> 
-						<span class="font-icon"> 
-						   <i class="fa fa-plus-circle" aria-hidden="true" title="Add Properties"></i>
-						</span>
-					</td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
-	<!-- Add project Model -->
-	<div id="addProject" class="modal fade" role="dialog">
-		<div class="modal-dialog">
+    <div class="col-md-12">
+        <table class="table table-striped table-bordered">
+            <thead class="center">
+                <tr>
+                    <th>Title</th>
+                    <th>Status</th>
+                    <th>Staring Price</th>
+                    <th>Locality</th>
+                    <th>Address</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr data-ng-repeat="project in projectList | orderBy: 'title'">
+                    <td>{{project.title}}</td>
+                    <td>{{project.status}}</td>
+                    <td>{{project.startingPrice}}</td>
+                    <td>{{project.address.area}}, {{ project.address.street }}</td>
+                    <td>{{project.address.city}}, {{ project.address.state }}, {{
+                        project.address.country }}</td>
+                    <td>
+                    <span class="font-icon" data-ng-click="editProject(project)"> 
+                        <i class="fa fa-pencil" aria-hidden="true" title="Edit Project"></i>
+                    </span>
+                     <span class="font-icon" data-toggle="modal"  data-target="#addProperty" data-ng-click="setProject(project)">
+                        <i class="fa fa-plus-circle" aria-hidden="true" title="Add Properties"></i>
+                    </span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+    <!-- Add project Model -->
+    <div id="addProject" class="modal fade" role="dialog">
+        <div class="modal-dialog">
 
-			<!-- Modal content-->
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title">
-						<Strong>Add Project </Strong>
-					</h4>
-				</div>
-				<div class="modal-body">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">
+                        <Strong>Add Project </Strong>
+                    </h4>
+                </div>
+                <div class="modal-body">
 
-					<form class="form-horizontal" name="projectForm">
-						<div class="form-group">
-							<div class="col-sm-8">
-								<input type="text" class="form-control" name="title" data-ng-model="newProject.title"
-									placeholder="Enter Project Title" required>
-<!-- 									<span style="color:red" ng-show="projectForm.title.$dirty && projectForm.title.$invalid"> -->
-<!--                                          <span ng-show="projectForm.title.$error.required">Title is required.</span> -->
-<!--                                     </span> -->
-							</div>
-						</div>
-						<div class="form-group">
-							<div class="col-sm-8">
-								<input type="text" class="form-control" id="price" data-ng-model="newProject.startingPrice"
-									placeholder="Enter Starting price" required>
-							</div>
-						</div>
-						<div class="form-group">
-							<div class="col-sm-8">
-<!-- 							<select class="form-control" data-ng-model="newProject.status"> -->
-<!-- 							     <option>Select Status</option> -->
-<!--                                  <option ng-repeat="status in statusList">{{status}}</option> -->
-<!--                             </select> -->
-							
-								<select  class="form-control" name="status" data-ng-model="newProject.status" ng-options="status for status in statusList" required>
-                                </select>
-<!--                                 <span style="color:red" ng-show="projectForm.status.$dirty && projectForm.status.$invalid"> -->
-<!--                                          <span ng-show="projectForm.status.$error.required">Status is required.</span> -->
-<!--                                     </span> -->
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-12">
-								<h4>
-									<Strong> Address of Property </Strong>
-								</h4>
-								<hr />
-							</div>
-						</div>
-						<div class="form-group">
-							<div class="col-sm-8">
-								<input type="text" class="form-control" id="area" data-ng-model="newProject.address.street"
-									placeholder="Enter Project Area" required>
-							</div>
-						</div>
-						<div class="form-group">
-							<div class="col-sm-8">
-								<input type="text" class="form-control" id="locality" data-ng-model="newProject.address.area"
-									placeholder="Enter Project locality" required>
-							</div>
-						</div>
-						<div class="form-group">
-							<div class="col-sm-8">
-								<input type="text" class="form-control" id="city"  data-ng-model="newProject.address.city"
-									placeholder="Enter City" required>
-							</div>
-						</div>
-						<div class="form-group">
+                    <form class="form-horizontal" name="projectForm">
+                        <div class="form-group">
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" id="state" data-ng-model="newProject.address.state"
+                                <input type="text" class="form-control" name="title"
+                                    data-ng-model="newProject.title"
+                                    placeholder="Enter Project Title" required>
+                                <!--                                    <span style="color:red" ng-show="projectForm.title.$dirty && projectForm.title.$invalid"> -->
+                                <!--                                          <span ng-show="projectForm.title.$error.required">Title is required.</span> -->
+                                <!--                                     </span> -->
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="price"
+                                    data-ng-model="newProject.startingPrice"
+                                    placeholder="Enter Starting price" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-8">
+                                <!--                            <select class="form-control" data-ng-model="newProject.status"> -->
+                                <!--                                 <option>Select Status</option> -->
+                                <!--                                  <option ng-repeat="status in statusList">{{status}}</option> -->
+                                <!--                             </select> -->
+
+                                <select class="form-control" name="status"
+                                    data-ng-model="newProject.status"
+                                    ng-options="status for status in statusList" required>
+                                </select>
+                                <!--                                 <span style="color:red" ng-show="projectForm.status.$dirty && projectForm.status.$invalid"> -->
+                                <!--                                          <span ng-show="projectForm.status.$error.required">Status is required.</span> -->
+                                <!--                                     </span> -->
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h4>
+                                    <Strong> Address of Property </Strong>
+                                </h4>
+                                <hr />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="area"
+                                    data-ng-model="newProject.address.street"
+                                    placeholder="Enter Project Area" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="locality"
+                                    data-ng-model="newProject.address.area"
+                                    placeholder="Enter Project locality" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="city"
+                                    data-ng-model="newProject.address.city"
+                                    placeholder="Enter City" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="state"
+                                    data-ng-model="newProject.address.state"
                                     placeholder="Enter State" required>
                             </div>
                         </div>
-						<div class="form-group">
+                        <div class="form-group">
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" id="country" data-ng-model="newProject.address.country"
+                                <input type="text" class="form-control" id="country"
+                                    data-ng-model="newProject.address.country"
                                     placeholder="Enter Country" required>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" id="zipcode" data-ng-model="newProject.address.zipcode"
+                                <input type="text" class="form-control" id="zipcode"
+                                    data-ng-model="newProject.address.zipcode"
                                     placeholder="Enter Zipcode">
                             </div>
                         </div>
 
-						<div class="form-group">
-							<div class="col-sm-4">
-								<button data-ng-hide="newProject.id && newProject.id!=''"type="submit" class="btn btn-info" data-ng-click="addProject(newProject)">Add project</button>
-							    <button data-ng-show="newProject.id && newProject.id!=''"type="submit" class="btn btn-info" data-ng-click="updateProject(newProject)">Update project</button>
-							
-							</div>
-							<div class="col-sm-4">
-								<button type="button" class="btn btn-default"
-									data-dismiss="modal">Cancel</button>
-							</div>
+                        <div class="form-group">
+                            <div class="col-sm-4">
+                                <button data-ng-hide="newProject.id && newProject.id!=''"
+                                    type="submit" class="btn btn-info"
+                                    data-ng-click="addProject(newProject)">Add project</button>
+                                <button data-ng-show="newProject.id && newProject.id!=''"
+                                    type="submit" class="btn btn-info"
+                                    data-ng-click="updateProject(newProject)">Update
+                                    project</button>
 
-						</div>
-					</form>
+                            </div>
+                            <div class="col-sm-4">
+                                <button type="button" class="btn btn-default"
+                                    data-dismiss="modal">Cancel</button>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+                <!--       <div class="modal-footer"> -->
+                <!--         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
+                <!--       </div> -->
+            </div>
+
+        </div>
+    </div>
+
+<!-- Add Property -->
+<div id="addProperty" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">
+                    <Strong>Add Property </Strong>
+                </h4>
+            </div>
+            <div class="modal-body">
+
+                <form class="form-horizontal" name="propertyForm">
+                    <div class="form-group">
+                        <div class="col-sm-8">
+                            <select class="form-control" name="bedrooms"
+                                data-ng-model="newProperty.bedrooms"
+                                ng-options="bedroom for bedroom in bedroomList" required>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="price"
+                                data-ng-model="newProperty.price" placeholder="Enter price"
+                                required>
+                        </div>
+                    </div>
+                     <div class="form-group">
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="size"
+                                data-ng-model="newProperty.size" placeholder="Enter size"
+                                required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-4">
+                            <button data-ng-hide="newProperty.id && newProperty.id!=''"
+                                type="submit" class="btn btn-info"
+                                data-ng-click="addProperty(newProperty)">Add Property</button>
+                            <button data-ng-show="newProperty.id && newProperty.id!=''"
+                                type="submit" class="btn btn-info"
+                                data-ng-click="updateProperty(newProperty)">Update
+                                Property</button>
+
+                        </div>
+                        <div class="col-sm-4">
+                            <button type="button" class="btn btn-default"
+                                data-dismiss="modal">Cancel</button>
+                        </div>
+
+                    </div>
+                </form>
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4>
+                            <Strong>Propertys </Strong>
+                        </h4>
+                        <hr />
+                    </div>
+                </div>
+            </div>
+			<div class="row">
+				<div class="col-md-12">
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th>Flat Type</th>
+								<th>Area SQ.FT</th>
+								<th>Price</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr >
+								<td>{{newProperty.bedrooms}} BHK</td>
+								<td>{{newProperty.size}} Sq. ft</td>
+								<td>{{newProperty.price| currency:' &#8360 '}}</td>
+							</tr>
+						</tbody>
+					</table>
 				</div>
-				<!--       <div class="modal-footer"> -->
-				<!--         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
-				<!--       </div> -->
 			</div>
+			<div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
 
-		</div>
-	</div>
-	
-	
-	
-
-
+    </div>
 </div>

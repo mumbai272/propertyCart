@@ -18,7 +18,7 @@ import com.app.property.service.dto.PropertyOutputDTO;
 public class PropertyRestService {
 
     @Autowired
-    private PropertyService PropertyService;
+    private PropertyService propertyService;
 
     @RequestMapping(method = RequestMethod.POST)
     @ResponseBody
@@ -26,7 +26,7 @@ public class PropertyRestService {
         BaseResponse<PropertyDTO> output = new BaseResponse<PropertyDTO>();
 
         try {
-            output.setData(PropertyService.addProperty(propertyDTO));
+            output.setData(propertyService.addProperty(propertyDTO));
             output.setMessage("Property succesfully added!");
         } catch (Exception ex) {
             output.setError("Error - adding the Property");
@@ -35,16 +35,16 @@ public class PropertyRestService {
         return output;
     }
 
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.PUT)
     @ResponseBody
-    public String updateProperty(@RequestBody PropertyDTO propertyDTO) {
+    public BaseResponse updateProperty(@RequestBody PropertyDTO propertyDTO) {
+        BaseResponse<PropertyDTO> output = new BaseResponse<PropertyDTO>();
         try {
-            BaseResponse<PropertyDTO> output = new BaseResponse<PropertyDTO>();
-            output.setData(PropertyService.updateProperty(propertyDTO));
+            output.setData(propertyService.updateProperty(propertyDTO));
         } catch (Exception ex) {
-            return ex.toString();
+            output.setError("Error - updating the Property");
         }
-        return "Property succesfully updated!";
+        return output;
     }
 
     @RequestMapping(value = "/{propertyId}", method = RequestMethod.GET)
@@ -53,7 +53,7 @@ public class PropertyRestService {
         BaseResponse<PropertyOutputDTO> output = new BaseResponse<PropertyOutputDTO>();
 
         try {
-            output.setData(PropertyService.getProperty(propertyId));
+            output.setData(propertyService.getProperty(propertyId));
             output.setMessage("Property succesfully retrieved!");
         } catch (Exception ex) {
             output.setError(ex.getMessage());

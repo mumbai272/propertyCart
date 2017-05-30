@@ -26,7 +26,7 @@ public class PropertyDTO {
 		}
 		
 		if(this.projectId > 0 ) {
-			property.setAddressId(this.projectId);
+			property.setProjectId(this.projectId);
 		}
 		
 		if(this.id > 0 ) {

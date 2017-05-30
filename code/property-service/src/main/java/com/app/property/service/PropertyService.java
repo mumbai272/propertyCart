@@ -3,6 +3,8 @@ package com.app.property.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -14,6 +16,7 @@ import com.app.property.service.models.Address;
 import com.app.property.service.models.Property;
 
 @Repository
+@Transactional
 public class PropertyService {
 
     @Autowired
@@ -52,9 +55,10 @@ public class PropertyService {
     }
 
     public PropertyDTO addProperty(PropertyDTO dto) {
-        if (dto.userId <= 0) {
-            throw new RuntimeException("Missing user id");
-        }
+//        if (dto.userId <= 0) {
+//            throw new RuntimeException("Missing user id");
+//        }
+        dto.userId=1;
 
         if (dto.addressId <= 0) {
             throw new RuntimeException("Missing address id");
