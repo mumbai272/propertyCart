@@ -17,6 +17,7 @@ import org.springframework.util.CollectionUtils;
 import com.app.property.service.dao.ImageDAO;
 import com.app.property.service.dao.PropertyDAO;
 import com.app.property.service.dto.AddressDTO;
+import com.app.property.service.dto.ImageDTO;
 import com.app.property.service.dto.ProjectDTO;
 import com.app.property.service.models.Image;
 import com.app.property.service.models.Project;
@@ -144,6 +145,15 @@ public class ProjectService {
             throw new RuntimeException("image does not exist");
         }
         return f;
+    }
+    
+    public List<ImageDTO> getAllProjectImages(long projectId) {
+        List<ImageDTO> dtos=new ArrayList<ImageDTO>();
+        List<Image> image = imageDAO.getImages(projectId);
+        for (Image i : image) {
+            dtos.add(i.toDTO());
+        }
+        return dtos;
     }
 
     public ProjectDTO toDTO(Project project) {

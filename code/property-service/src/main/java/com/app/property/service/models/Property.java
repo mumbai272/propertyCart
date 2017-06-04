@@ -8,9 +8,6 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-import com.app.property.service.dto.PropertyDTO;
-import com.app.property.service.dto.PropertyOutputDTO;
-
 @Entity
 @Table(name = "ps_property")
 public class Property {
@@ -110,24 +107,7 @@ public class Property {
         this.userId = userId;
     }
 
-    public PropertyDTO toDTO() {
-        PropertyDTO dto = new PropertyDTO();
-        dto.id = this.id;
-        dto.bedrooms = this.bedrooms;
-        dto.price = this.price;
-        dto.isNew = this.isNew;
-        dto.addressId = this.addressId;
-        dto.projectId = this.projectId;
-        dto.userId = this.userId;
-        dto.size = this.size;
-        return dto;
-    }
-
-    public PropertyOutputDTO toOutputDTO() {
-        PropertyOutputDTO dto = new PropertyOutputDTO();
-        dto.property = this.toDTO();
-        return dto;
-    }
+    
 
 
     public Long getSize() {

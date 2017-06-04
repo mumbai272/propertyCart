@@ -52,20 +52,47 @@ app.controller('ProjectController', function($scope, $rootScope,
 			$scope.msg = msg;
 		});
 	}
-	$scope.setProject = function(project) {
-		newProperty={};
+	$scope.setProject = function(project,type) {
 		$scope.currentProject = project;
+		if(type && type==='property'){
+			getAllProperties($scope.currentProject.id);
+		}
+		if(type && type==='image'){
+			getAllImages($scope.currentProject.id);
+		}
 	}
-	$scope.addProperty=function(newProperty){
-		newProperty.projectId=$scope.currentProject.id;
-		newProperty.addressId=$scope.currentProject.addressId;
-		newProperty.isNew=true;
-		propertyService.addProperty(angular.toJson(newProperty),function(data) {
-//			propertyService.getAllProperties();
-			$scope.msg = "property updated successfully";
+	$scope.editPropety = function(property) {
+		$scope.newProperty = property;
+	}
+	function getAllProperties(projectId) {
+		propertyService.getAllProperties(projectId, function(data) {
+			$scope.currentProject.properties = data;
 		}, function(msg) {
 			$scope.msg = msg;
 		});
+	}
+	$scope.addProperty = function(newProperty) {
+		newProperty.projectId = $scope.currentProject.id;
+		newProperty.addressId = $scope.currentProject.addressId;
+		newProperty.isNew = true;
+		propertyService.addProperty(angular.toJson(newProperty),
+				function(data) {
+					getAllProperties($scope.currentProject.id);
+					$scope.newProperty = {};
+					$scope.msg = "property added successfully";
+				}, function(msg) {
+					$scope.msg = msg;
+				});
+	}
+	function getAllImages(projectId);{
+		projetService.getAllImages(projectId, function(data) {
+			$scope.currentProject.images = data;
+		}, function(msg) {
+			$scope.msg = msg;
+		});
+	}
+	$scope.addImage=function(newImage){
+		
 	}
 	$scope.plotOnMap = function(lat, long) {
 

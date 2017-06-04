@@ -34,4 +34,5 @@ public class ImageDAO {
 	public Image getImageById(long imageId) {
 		return entityManager.find(Image.class, imageId);
     }
+
 }

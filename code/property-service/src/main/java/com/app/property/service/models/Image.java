@@ -15,106 +15,108 @@ import com.app.property.service.dto.ImageDTO;
 @Entity
 @Table(name = "ps_image")
 public class Image {
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
-	
-	@NotNull
-	private String imageName;
-	
-	@NotNull
-	private String type;
-	
-	@NotNull
-	private String status; // Active or Inactive or Blocked
 
-	@ManyToOne
-	@JoinColumn(name="project_id")
-	private Project project;
-	
-	@ManyToOne
-	@JoinColumn(name="property_id")
-	private Property property;
-	
-	@NotNull
-	@Column(name="is_active")
-	private boolean isActive;
-	
-	@NotNull
-	@Column(name="is_blocked")	
-	private boolean isBlocked;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
 
-	public long getId() {
-		return id;
-	}
+    @NotNull
+    private String imageName;
 
-	public void setId(long id) {
-		this.id = id;
-	}	
+    @NotNull
+    private String type;
 
-	public String getImageName() {
-		return imageName;
-	}
+    @NotNull
+    private String status; // Active or Inactive or Blocked
 
-	public void setImageName(String imageName) {
-		this.imageName = imageName;
-	}
+    @ManyToOne
+    @JoinColumn(name = "project_id")
+    private Project project;
 
-	public String getType() {
-		return type;
-	}
+    @ManyToOne
+    @JoinColumn(name = "property_id")
+    private Property property;
 
-	public void setType(String type) {
-		this.type = type;
-	}
+    @NotNull
+    @Column(name = "is_active")
+    private boolean isActive;
 
-	public String getStatus() {
-		return status;
-	}
+    @NotNull
+    @Column(name = "is_blocked")
+    private boolean isBlocked;
 
-	public void setStatus(String status) {
-		this.status = status;
-	}
+    public long getId() {
+        return id;
+    }
 
-	public Project getProject() {
-		return project;
-	}
+    public void setId(long id) {
+        this.id = id;
+    }
 
-	public void setProject(Project project) {
-		this.project = project;
-	}
+    public String getImageName() {
+        return imageName;
+    }
 
-	public Property getProperty() {
-		return property;
-	}
+    public void setImageName(String imageName) {
+        this.imageName = imageName;
+    }
 
-	public void setProperty(Property property) {
-		this.property = property;
-	}
+    public String getType() {
+        return type;
+    }
 
-	public boolean isActive() {
-		return isActive;
-	}
+    public void setType(String type) {
+        this.type = type;
+    }
 
-	public void setActive(boolean isActive) {
-		this.isActive = isActive;
-	}
+    public String getStatus() {
+        return status;
+    }
 
-	public boolean isBlocked() {
-		return isBlocked;
-	}
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
-	public void setBlocked(boolean isBlocked) {
-		this.isBlocked = isBlocked;
-	}
+    public Project getProject() {
+        return project;
+    }
 
-	public ImageDTO toDTO() {
-		ImageDTO dto = new ImageDTO();
-		dto.setId(this.id);
-		dto.setType(this.type);
-		dto.setImageName(this.imageName);
-		dto.setUrl("project/image/"+this.id);
-		return dto;
-	}
-	
+    public void setProject(Project project) {
+        this.project = project;
+    }
+
+    public Property getProperty() {
+        return property;
+    }
+
+    public void setProperty(Property property) {
+        this.property = property;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean isActive) {
+        this.isActive = isActive;
+    }
+
+    public boolean isBlocked() {
+        return isBlocked;
+    }
+
+    public void setBlocked(boolean isBlocked) {
+        this.isBlocked = isBlocked;
+    }
+
+    public ImageDTO toDTO() {
+        ImageDTO dto = new ImageDTO();
+        dto.setId(this.id);
+        dto.setType(this.type);
+        dto.setImageName(this.imageName);
+        dto.setUrl("project/image/" + this.id);
+        return dto;
+    }
+
+   
 }

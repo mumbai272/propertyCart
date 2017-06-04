@@ -1,42 +1,82 @@
 package com.app.property.service.dto;
 
-import com.app.property.service.models.Property;
 
 public class PropertyDTO {
-	public long id;
-	public long bedrooms;
-	public double price;
-	public boolean isNew;
-	public long addressId;
-	public long projectId;
-	public long userId;
-	public double size;
+	private long id;
+	private long bedrooms;
+	private double price;
+	private boolean isNew;
+	private long addressId;
+	private long projectId;
+	private long userId;
+	private long size;
+    
+    public long getId() {
+        return id;
+    }
+    
+    public void setId(long id) {
+        this.id = id;
+    }
+    
+    public long getBedrooms() {
+        return bedrooms;
+    }
+    
+    public void setBedrooms(long bedrooms) {
+        this.bedrooms = bedrooms;
+    }
+    
+    public double getPrice() {
+        return price;
+    }
+    
+    public void setPrice(double price) {
+        this.price = price;
+    }
+    
+    public boolean isNew() {
+        return isNew;
+    }
+    
+    public void setNew(boolean isNew) {
+        this.isNew = isNew;
+    }
+    
+    public long getAddressId() {
+        return addressId;
+    }
+    
+    public void setAddressId(long addressId) {
+        this.addressId = addressId;
+    }
+    
+    public long getProjectId() {
+        return projectId;
+    }
+    
+    public void setProjectId(long projectId) {
+        this.projectId = projectId;
+    }
+    
+    public long getUserId() {
+        return userId;
+    }
+    
+    public void setUserId(long userId) {
+        this.userId = userId;
+    }
+    
+    public Long getSize() {
+        return size;
+    }
+    
+    public void setSize(String size) {
+        this.size = Long.parseLong(size);
+    }
+    public void setSize(long size) {
+        this.size = size;
+    }
 	
-	public Property toModel() {
-		return updateModel(new Property());
-	}
 	
-	public Property updateModel(Property property) {
-		property.setBedrooms(this.bedrooms);
-		property.setPrice(this.price);
-		property.setNew(this.isNew);
-		
-		if(this.addressId > 0 ) {
-			property.setAddressId(this.addressId);
-		}
-		
-		if(this.projectId > 0 ) {
-			property.setProjectId(this.projectId);
-		}
-		
-		if(this.id > 0 ) {
-			property.setUserId(this.userId);
-		}
-		
-		if(this.id > 0 ) {
-			property.setAddressId(this.id);
-		}
-		
-		return property;
-	}
 }

@@ -70,6 +70,33 @@ app.factory('projectService', function($http) {
                     }
                 );
         }
+        factory.getAllImages = function(projectId,success,error){ 
+
+            $http.get('project/image/list/'+projectId).then(function(response,status){
+                   if(success){
+                        success(response.data.data);
+                      }
+                  },function(response,status){
+                    if(error){
+                        error(response.data.message);
+                      }     
+                    }
+                );
+        }
+        factory.uploadImage=function(image){
+        	$http.post('project',data).then(function(response,status){
+                if(success){
+                     success(response.data.data);
+                     $('#addProject').modal('hide');
+                   }
+               },function(response,status){
+                 if(error){
+                     error(response.data.message);
+                   }     
+                 }
+             );
+        }
+        
     return factory;   
   }
 );
