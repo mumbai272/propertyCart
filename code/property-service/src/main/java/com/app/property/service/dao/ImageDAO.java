@@ -34,5 +34,8 @@ public class ImageDAO {
 	public Image getImageById(long imageId) {
 		return entityManager.find(Image.class, imageId);
     }
+    public void save(Image img) {
+        entityManager.persist(img);        
+    }
 
 }

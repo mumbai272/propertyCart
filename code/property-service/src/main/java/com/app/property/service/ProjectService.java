@@ -1,6 +1,8 @@
 package com.app.property.service;
 
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -13,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.app.property.service.dao.ImageDAO;
 import com.app.property.service.dao.PropertyDAO;
@@ -138,7 +141,6 @@ public class ProjectService {
         StringBuilder url =
             new StringBuilder(rootDirectory).append(File.separator)
                     .append(image.getProject().getId()).append(File.separator)
-                    .append(image.getProperty().getId()).append(File.separator)
                     .append(image.getImageName());
         File f = new File(url.toString());
         if (f == null) {
@@ -146,9 +148,9 @@ public class ProjectService {
         }
         return f;
     }
-    
+
     public List<ImageDTO> getAllProjectImages(long projectId) {
-        List<ImageDTO> dtos=new ArrayList<ImageDTO>();
+        List<ImageDTO> dtos = new ArrayList<ImageDTO>();
         List<Image> image = imageDAO.getImages(projectId);
         for (Image i : image) {
             dtos.add(i.toDTO());
@@ -174,5 +176,39 @@ public class ProjectService {
         project.setStatus(statusToIdMap.get(dto.getStatus()));
         // project.setAddress(dto.getAddress().toModel());
         return project;
+    }
+
+
+    public void saveImage(long projectId, String name, String type, MultipartFile file)
+            throws Exception {
+        Project project = propertyDAO.getByProjectId(projectId);
+        if (project == null) {
+            throw new Exception("invalid project id is passed");
+        }
+        Image img = new Image();
+        img.setImageName(name);
+        img.setProject(project);
+        img.setType(type);
+        img.setStatus("Active");
+        imageDAO.save(img);
+        String rootDirectory = env.getProperty("file.rootDirectory");
+        StringBuilder rootPath =
+            new StringBuilder(rootDirectory).append(File.separator).append(project.getId())
+                    .append(File.separator);
+
+        byte[] bytes = file.getBytes();
+
+        // Creating the directory to store file
+        File dir = new File(rootPath.toString());
+        if (!dir.exists()) {
+            dir.mkdirs();
+        }
+
+        // Create the file on server
+        File serverFile = new File(dir.getAbsolutePath() + File.separator + name);
+        BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
+        stream.write(bytes);
+        stream.close();
+
     }
 }

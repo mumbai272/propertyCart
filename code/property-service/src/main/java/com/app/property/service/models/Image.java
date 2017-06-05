@@ -1,6 +1,5 @@
 package com.app.property.service.models;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -33,19 +32,7 @@ public class Image {
     @JoinColumn(name = "project_id")
     private Project project;
 
-    @ManyToOne
-    @JoinColumn(name = "property_id")
-    private Property property;
-
-    @NotNull
-    @Column(name = "is_active")
-    private boolean isActive;
-
-    @NotNull
-    @Column(name = "is_blocked")
-    private boolean isBlocked;
-
-    public long getId() {
+     public long getId() {
         return id;
     }
 
@@ -85,29 +72,6 @@ public class Image {
         this.project = project;
     }
 
-    public Property getProperty() {
-        return property;
-    }
-
-    public void setProperty(Property property) {
-        this.property = property;
-    }
-
-    public boolean isActive() {
-        return isActive;
-    }
-
-    public void setActive(boolean isActive) {
-        this.isActive = isActive;
-    }
-
-    public boolean isBlocked() {
-        return isBlocked;
-    }
-
-    public void setBlocked(boolean isBlocked) {
-        this.isBlocked = isBlocked;
-    }
 
     public ImageDTO toDTO() {
         ImageDTO dto = new ImageDTO();
