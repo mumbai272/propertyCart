@@ -86,12 +86,12 @@ public class FileRestService {
      */
     @RequestMapping(value = "/{projectId}/uploadFile", method = RequestMethod.POST)
     public @ResponseBody BaseResponse uploadFileHandler(@PathVariable("projectId") long projectId,
-            @RequestParam("name") String name, @RequestParam("type") String type,
+           @RequestParam("type") String type,
             @RequestParam("file") MultipartFile file) {
         BaseResponse response = new BaseResponse();
         if (!file.isEmpty()) {
             try {
-                projectService.saveImage(projectId, name, type, file);
+                projectService.saveImage(projectId,  type, file);
 
                 response.setStatus(1l);
                 response.setMessage("You successfully uploaded file");
@@ -100,7 +100,7 @@ public class FileRestService {
                 response.setMessage("You failed to upload file");
             }
         } else {
-            response.setMessage("You failed to upload " + name + " because the file was empty.");
+            response.setMessage("You failed to upload  because the file was empty.");
         }
         return response;
     }

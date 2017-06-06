@@ -1,9 +1,10 @@
 var app = angular.module('propertyApp');
-app.controller('ProjectController', function($scope, $rootScope,
+app.controller('ProjectController', function($scope, $rootScope,$http,
 		projectService, propertyService) {
 	$rootScope.statusList = [ "Prelaunching", "Under Construction",
 			"Ready Possession" ];
 	$rootScope.bedroomList = [ 1, 2, 3 ];
+	$rootScope.imageType=["Image","Thumbnail"];
 	init();
 	function init() {
 		getAllProjects();
@@ -84,15 +85,36 @@ app.controller('ProjectController', function($scope, $rootScope,
 					$scope.msg = msg;
 				});
 	}
-	function getAllImages(projectId);{
-		projetService.getAllImages(projectId, function(data) {
+	function getAllImages(projectId){
+		projectService.getAllImages(projectId, function(data) {
 			$scope.currentProject.images = data;
+			$scope.newImage = {};
 		}, function(msg) {
 			$scope.msg = msg;
 		});
 	}
-	$scope.addImage=function(newImage){
-		
+	$scope.addImage = function(newImage) {
+		var file=document.getElementById('file');
+		var type = newImage.type;
+		var fd = new FormData();
+		var uploadUrl = 'project/' + $scope.currentProject.id + '/uploadFile';
+		fd.append('file', file.value);
+		fd.append('type', type);
+		$http.post(uploadUrl, fd, {
+			transformRequest : angular.identity,
+			headers : {
+				'Content-Type' : undefined
+			}
+		}).then(function(response, status) {
+			if (success) {
+				getAllImages($scope.currentProject.id)
+				$scope.newImage = {};
+			}
+		}, function(response, status) {
+			if (error) {
+				$scope.msg = response.data.message;
+			}
+		});
 	}
 	$scope.plotOnMap = function(lat, long) {
 

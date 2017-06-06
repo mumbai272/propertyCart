@@ -179,14 +179,14 @@ public class ProjectService {
     }
 
 
-    public void saveImage(long projectId, String name, String type, MultipartFile file)
+    public void saveImage(long projectId, String type, MultipartFile file)
             throws Exception {
         Project project = propertyDAO.getByProjectId(projectId);
         if (project == null) {
             throw new Exception("invalid project id is passed");
         }
         Image img = new Image();
-        img.setImageName(name);
+        img.setImageName(file.getOriginalFilename());
         img.setProject(project);
         img.setType(type);
         img.setStatus("Active");
@@ -205,7 +205,7 @@ public class ProjectService {
         }
 
         // Create the file on server
-        File serverFile = new File(dir.getAbsolutePath() + File.separator + name);
+        File serverFile = new File(dir.getAbsolutePath() + File.separator + file.getOriginalFilename());
         BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
         stream.write(bytes);
         stream.close();
