@@ -93,12 +93,15 @@ app.controller('ProjectController', function($scope, $rootScope,$http,
 			$scope.msg = msg;
 		});
 	}
+	
 	$scope.addImage = function(newImage) {
-		var file=document.getElementById('file');
+	
 		var type = newImage.type;
 		var fd = new FormData();
 		var uploadUrl = 'project/' + $scope.currentProject.id + '/uploadFile';
-		fd.append('file', file.value);
+		angular.forEach($scope.files,function(file){
+			fd.append('file', file);
+		});
 		fd.append('type', type);
 		$http.post(uploadUrl, fd, {
 			transformRequest : angular.identity,
