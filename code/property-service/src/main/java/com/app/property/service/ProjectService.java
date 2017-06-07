@@ -211,4 +211,7 @@ public class ProjectService {
         stream.close();
 
     }
+    public void deleteImage(long imageId){
+        imageDAO.delete(imageId);
+    }
 }

@@ -1,10 +1,10 @@
 var app = angular.module('propertyApp');
-app.controller('ProjectController', function($scope, $rootScope,$http,
+app.controller('ProjectController', function($scope, $rootScope, $http,
 		projectService, propertyService) {
 	$rootScope.statusList = [ "Prelaunching", "Under Construction",
 			"Ready Possession" ];
 	$rootScope.bedroomList = [ 1, 2, 3 ];
-	$rootScope.imageType=["Image","Thumbnail"];
+	$rootScope.imageType = [ "Image", "Thumbnail" ];
 	init();
 	function init() {
 		getAllProjects();
@@ -53,12 +53,12 @@ app.controller('ProjectController', function($scope, $rootScope,$http,
 			$scope.msg = msg;
 		});
 	}
-	$scope.setProject = function(project,type) {
+	$scope.setProject = function(project, type) {
 		$scope.currentProject = project;
-		if(type && type==='property'){
+		if (type && type === 'property') {
 			getAllProperties($scope.currentProject.id);
 		}
-		if(type && type==='image'){
+		if (type && type === 'image') {
 			getAllImages($scope.currentProject.id);
 		}
 	}
@@ -85,7 +85,7 @@ app.controller('ProjectController', function($scope, $rootScope,$http,
 					$scope.msg = msg;
 				});
 	}
-	function getAllImages(projectId){
+	function getAllImages(projectId) {
 		projectService.getAllImages(projectId, function(data) {
 			$scope.currentProject.images = data;
 			$scope.newImage = {};
@@ -93,13 +93,13 @@ app.controller('ProjectController', function($scope, $rootScope,$http,
 			$scope.msg = msg;
 		});
 	}
-	
+
 	$scope.addImage = function(newImage) {
-	
+
 		var type = newImage.type;
 		var fd = new FormData();
 		var uploadUrl = 'project/' + $scope.currentProject.id + '/uploadFile';
-		angular.forEach($scope.files,function(file){
+		angular.forEach($scope.files, function(file) {
 			fd.append('file', file);
 		});
 		fd.append('type', type);
@@ -108,6 +108,21 @@ app.controller('ProjectController', function($scope, $rootScope,$http,
 			headers : {
 				'Content-Type' : undefined
 			}
+		}).then(function(response, status) {
+			if (success) {
+				getAllImages($scope.currentProject.id)
+				$scope.newImage = {};
+			}
+		}, function(response, status) {
+			if (error) {
+				$scope.msg = response.data.message;
+			}
+		});
+	}
+	$scope.deleteImage = function(id) {
+		$http({
+			method : "DELETE",
+			url : 'project/image/' + id
 		}).then(function(response, status) {
 			if (success) {
 				getAllImages($scope.currentProject.id)

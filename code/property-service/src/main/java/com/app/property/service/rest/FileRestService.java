@@ -104,6 +104,8 @@ public class FileRestService {
         }
         return response;
     }
-
-
+    @RequestMapping(value = "/image/{imageId}", method = RequestMethod.DELETE)
+    public void deleteImage(@PathVariable("imageId") long imageId){
+        projectService.deleteImage(imageId);
+    }
 }
