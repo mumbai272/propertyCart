@@ -38,8 +38,7 @@ public class ImageDAO {
         entityManager.persist(img);        
     }
     public void delete(long imageId) {
-        entityManager.createQuery("delete from Image i where i.id="+imageId);
-        
+        entityManager.createQuery("delete from Image i where i.id="+imageId).executeUpdate();        
     }
 
 }

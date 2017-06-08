@@ -109,14 +109,11 @@ app.controller('ProjectController', function($scope, $rootScope, $http,
 				'Content-Type' : undefined
 			}
 		}).then(function(response, status) {
-			if (success) {
-				getAllImages($scope.currentProject.id)
-				$scope.newImage = {};
-			}
+			getAllImages($scope.currentProject.id)
+			$scope.newImage = {};			
 		}, function(response, status) {
-			if (error) {
-				$scope.msg = response.data.message;
-			}
+			$scope.msg = response.data.message;
+			$scope.newImage = {};
 		});
 	}
 	$scope.deleteImage = function(id) {
@@ -124,15 +121,18 @@ app.controller('ProjectController', function($scope, $rootScope, $http,
 			method : "DELETE",
 			url : 'project/image/' + id
 		}).then(function(response, status) {
-			if (success) {
+			if (response.data.status == 1) {
 				getAllImages($scope.currentProject.id)
 				$scope.newImage = {};
 			}
 		}, function(response, status) {
-			if (error) {
+			if (response.data.status == -1) {
 				$scope.msg = response.data.message;
 			}
 		});
+	}
+	$scope.resetMsg=function(){
+		$scope.msg='';
 	}
 	$scope.plotOnMap = function(lat, long) {
 

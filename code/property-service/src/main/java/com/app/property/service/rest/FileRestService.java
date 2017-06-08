@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.tomcat.util.http.fileupload.FileUploadBase.FileSizeLimitExceededException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
@@ -86,17 +87,20 @@ public class FileRestService {
      */
     @RequestMapping(value = "/{projectId}/uploadFile", method = RequestMethod.POST)
     public @ResponseBody BaseResponse uploadFileHandler(@PathVariable("projectId") long projectId,
-           @RequestParam("type") String type,
-            @RequestParam("file") MultipartFile file) {
+            @RequestParam("type") String type, @RequestParam("file") MultipartFile file) {
         BaseResponse response = new BaseResponse();
         if (!file.isEmpty()) {
             try {
-                projectService.saveImage(projectId,  type, file);
+                projectService.saveImage(projectId, type, file);
 
                 response.setStatus(1l);
                 response.setMessage("You successfully uploaded file");
 
-            } catch (Exception e) {
+            } catch(FileSizeLimitExceededException e){
+                response.setStatus(-1L);
+                response.setMessage(e.getMessage());
+            }catch (Exception e) { 
+                response.setStatus(-1L);
                 response.setMessage("You failed to upload file");
             }
         } else {
@@ -104,8 +108,18 @@ public class FileRestService {
         }
         return response;
     }
+
     @RequestMapping(value = "/image/{imageId}", method = RequestMethod.DELETE)
-    public void deleteImage(@PathVariable("imageId") long imageId){
-        projectService.deleteImage(imageId);
+    public @ResponseBody BaseResponse deleteImage(@PathVariable("imageId") long imageId) {
+        BaseResponse response = new BaseResponse();
+        try {
+            projectService.deleteImage(imageId);
+            response.setStatus(1L);
+            response.setMessage("deleted successfully");
+        } catch (Exception e) {
+            response.setStatus(-1L);
+            response.setMessage("Failed to delete image");
+        }
+        return response;
     }
 }

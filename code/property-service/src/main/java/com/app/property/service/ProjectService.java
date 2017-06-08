@@ -206,12 +206,21 @@ public class ProjectService {
 
         // Create the file on server
         File serverFile = new File(dir.getAbsolutePath() + File.separator + file.getOriginalFilename());
+       
         BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
         stream.write(bytes);
         stream.close();
 
     }
     public void deleteImage(long imageId){
+        Image image=imageDAO.getImageById(imageId);
+        String rootDirectory = env.getProperty("file.rootDirectory");
+        StringBuilder url =
+            new StringBuilder(rootDirectory).append(File.separator)
+                    .append(image.getProject().getId()).append(File.separator)
+                    .append(image.getImageName());
+        File f = new File(url.toString());
+        f.delete();
         imageDAO.delete(imageId);
     }
 }
