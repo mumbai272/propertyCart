@@ -2,6 +2,8 @@ package com.app.property.service.rest;
 
 import java.util.List;
 
+import javax.ws.rs.QueryParam;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -76,11 +78,15 @@ public class ProjectRestService {
      */
     @RequestMapping(method = RequestMethod.GET)
     @ResponseBody
-    public BaseResponse<List<ProjectDTO>> getProjects() {
+    public BaseResponse<List<ProjectDTO>> getProjects(@QueryParam("active") Boolean active) {
         BaseResponse<List<ProjectDTO>> output = new BaseResponse<List<ProjectDTO>>();
 
         try {
-            output.setData(projectService.getProjects());
+            if (active == null) {
+                active = false;
+            }
+            output.setData(projectService.getProjects(active));
+
             output.setMessage("Property succesfully retrieved!");
         } catch (Exception ex) {
             output.setError(ex.getMessage());
@@ -102,4 +108,4 @@ public class ProjectRestService {
         return output;
     }
 
- }
+}

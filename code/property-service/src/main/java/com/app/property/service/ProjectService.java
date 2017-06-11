@@ -54,6 +54,7 @@ public class ProjectService {
         dto.setAddressId(address.id);
         Project project = toModel(dto);
         project.setStatus(statusToIdMap.get(dto.getStatus()));
+        project.setIsActive("0");
         return toDTO(propertyDAO.addProject(project));
     }
 
@@ -95,9 +96,13 @@ public class ProjectService {
         return dto;
     }
 
-    public List<ProjectDTO> getProjects() {
-        List<Project> projects = propertyDAO.getAllProjects();
-
+    public List<ProjectDTO> getProjects(boolean active) {
+        List<Project> projects = null;
+        if (active) {
+            projects = propertyDAO.getAllActiveProjects();
+        } else {
+            projects = propertyDAO.getAllProjects();
+        }
         if (CollectionUtils.isEmpty(projects)) {
             throw new RuntimeException("No project entries found");
         }
@@ -179,8 +184,7 @@ public class ProjectService {
     }
 
 
-    public void saveImage(long projectId, String type, MultipartFile file)
-            throws Exception {
+    public void saveImage(long projectId, String type, MultipartFile file) throws Exception {
         Project project = propertyDAO.getByProjectId(projectId);
         if (project == null) {
             throw new Exception("invalid project id is passed");
@@ -205,15 +209,17 @@ public class ProjectService {
         }
 
         // Create the file on server
-        File serverFile = new File(dir.getAbsolutePath() + File.separator + file.getOriginalFilename());
-       
+        File serverFile =
+            new File(dir.getAbsolutePath() + File.separator + file.getOriginalFilename());
+
         BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
         stream.write(bytes);
         stream.close();
 
     }
-    public void deleteImage(long imageId){
-        Image image=imageDAO.getImageById(imageId);
+
+    public void deleteImage(long imageId) {
+        Image image = imageDAO.getImageById(imageId);
         String rootDirectory = env.getProperty("file.rootDirectory");
         StringBuilder url =
             new StringBuilder(rootDirectory).append(File.separator)

@@ -64,5 +64,8 @@ public class PropertyDAO {
     public List<Project> getAllProjects() {
         return entityManager.createQuery("from Project").getResultList();
     }
+    public List<Project> getAllActiveProjects() {
+        return entityManager.createQuery("from Project p where p.isActive=1").getResultList();
+    }
 
 }

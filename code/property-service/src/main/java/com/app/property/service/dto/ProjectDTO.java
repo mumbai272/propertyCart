@@ -20,6 +20,8 @@ public class ProjectDTO {
 
     private long userId;
 
+    private String isActive;
+
     private AddressDTO address;
 
     private String thumbnailImage;
@@ -102,7 +104,7 @@ public class ProjectDTO {
         this.images = images;
     }
 
-    
+
 
     public void addImages(ImageDTO image) {
         if (images == null) {
@@ -119,6 +121,18 @@ public class ProjectDTO {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+
+    
+    public String getIsActive() {
+        return isActive;
+    }
+
+
+    
+    public void setIsActive(String isActive) {
+        this.isActive = isActive;
     }
 
 

@@ -39,6 +39,9 @@ public class Project {
     @Column(name = "STARTING_PRICE", nullable = false, length = 50)
     private String startingPrice;
 
+    @Column(name = "IS_ACTIVE", nullable = false, length = 1)
+    private String isActive = "0";
+
     public long getId() {
         return id;
     }
@@ -101,6 +104,16 @@ public class Project {
 
     public void setStartingPrice(String startingPrice) {
         this.startingPrice = startingPrice;
+    }
+
+    
+    public String getIsActive() {
+        return isActive;
+    }
+
+    
+    public void setIsActive(String isActive) {
+        this.isActive = isActive;
     }
 
 }

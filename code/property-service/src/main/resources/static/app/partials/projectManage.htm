@@ -53,7 +53,12 @@
 						data-target="#addImages"
 						data-ng-click="setProject(project,'image')"> <i
 							class="fa fa-upload" aria-hidden="true" title="upload Images"></i>
-					</span></td>
+					</span>
+					<button button type="button" class="btn btn-info" ng-show="project.isActive=='0'"
+                        data-ng-click="activateDeactivateProject(project,'1')">Activate </button>
+                        <button button type="button" class="btn btn-info" ng-show="project.isActive=='1'"
+                        data-ng-click="activateDeactivateProject(project,'0')">Deactivate</button>
+                    </span></td>
 				</tr>
 			</tbody>
 		</table>

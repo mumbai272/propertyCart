@@ -15,6 +15,19 @@ app.factory('projectService', function($http) {
                       }
                   );
           }
+        factory.getAllActiveProjects = function(success,error){ 
+
+            $http.get('project?active=true').then(function(response,status){
+                   if(success){
+                        success(response.data.data);
+                      }
+                  },function(response,status){
+                    if(error){
+                        error(response.data.message);
+                      }     
+                    }
+                );
+        }
         factory.addProject = function(data,success,error){ 
 
             $http.post('project',data).then(function(response,status){

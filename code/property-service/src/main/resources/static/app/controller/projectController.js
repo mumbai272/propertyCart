@@ -8,11 +8,19 @@ app.controller('ProjectController', function($scope, $rootScope, $http,
 	init();
 	function init() {
 		getAllProjects();
+		getAllActiveProjects();
 		console.log("got the :" + $scope.projectList);
 	}
 	function getAllProjects() {
 		projectService.getAllProjects(function(data) {
 			$scope.projectList = data;
+		}, function(msg) {
+			$scope.msg = msg;
+		});
+	}
+	function getAllActiveProjects(){
+		projectService.getAllActiveProjects(function(data) {
+			$scope.activeProjectList = data;
 		}, function(msg) {
 			$scope.msg = msg;
 		});
@@ -133,6 +141,10 @@ app.controller('ProjectController', function($scope, $rootScope, $http,
 	}
 	$scope.resetMsg=function(){
 		$scope.msg='';
+	}
+	$scope.activateDeactivateProject = function(project, status) {
+		project.isActive = status;
+		$scope.updateProject(project);
 	}
 	$scope.plotOnMap = function(lat, long) {
 
