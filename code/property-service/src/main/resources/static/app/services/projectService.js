@@ -71,7 +71,7 @@ app.factory('projectService', function($http) {
         }
         factory.getPropertiesByProjectId=function(projectId,success,error){ 
 
-            $http.get('property/'+projectId).then(function(response,status){
+            $http.get('project/'+projectId+'/property').then(function(response,status){
                    if(success){
                         success(response.data.data);             
                         
