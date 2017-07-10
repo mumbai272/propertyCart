@@ -16,7 +16,7 @@ body {
     
 }
 .home-titles {
-    background: url(images/title-bg.png) repeat scroll 0 0;
+    background: url(/images/title-bg.png) repeat scroll 0 0;
     position: absolute;
     bottom: 50px;
     width: 86%;
